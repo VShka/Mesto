@@ -2,6 +2,7 @@
 
 const profile = document.querySelector('.profile');
 const openPopup = profile.querySelector('.user-info__button');
+const openPopupEditProfile = profile.querySelector('.edit-profile__button');
 const placesList = document.querySelector('.places-list');
 const placeCard = placesList.querySelector('.place-card');
 const popup = document.querySelector('.popup');
@@ -94,6 +95,7 @@ const deleteHandler = function () {
 /* Слушатели событий  */
 
 openPopup.addEventListener('click', openAndCloseForm);
+openPopupEditProfile.addEventListener('click', openAndCloseForm);
 closePopup.addEventListener('click', openAndCloseForm);
 placesList.addEventListener('click', likeHandler);
 placesList.addEventListener('click', deleteHandler);
