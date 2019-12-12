@@ -14,3 +14,8 @@
 .edit-profile__button:focus {
     outline-color: greenyellow;
   }
+
+.edit-profile__button:hover {
+    background-color: #fff;
+    color: #000;
+}
