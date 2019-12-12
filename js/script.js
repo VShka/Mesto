@@ -25,7 +25,7 @@ const getImgCard = function (obj) {
                     <h3 class="place-card__name">${obj.name}</h3>
                     <button class="place-card__like-icon"></button>
                 </div>
-            </div>`;
+          </div>`;
 };
 
 // отрисовка разметки карточки в html

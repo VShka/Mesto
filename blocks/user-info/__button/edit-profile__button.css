@@ -1,0 +1,16 @@
+.edit-profile__button {
+    background-color: transparent;
+    color: #fff;
+    width: 38px;
+    height: 18px;
+    margin-top: 24px;
+    font-family: Inter;
+    font-size: 12px;
+    line-height: 15px;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.edit-profile__button:focus {
+    outline-color: greenyellow;
+  }
