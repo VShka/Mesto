@@ -53,12 +53,12 @@ initialCardsToDisplay(initialCards);
 const openAndCloseForm = function () {
   popup.classList.toggle('popup_is-opened');
 };
-const openPopupEditProfile = function () {
-  popupEditProfile.classList.add('popup_is-opened');
+const openAndCloseEditForm = function () {
+  popupEditProfile.classList.toggle('popup_is-opened');
 };
-const closePopupEditForm = function () {
+/*const closePopupEditForm = function () {
   popupEditProfile.classList.remove('popup_is-opened');
-}
+}*/
 /* 4. Лайк */
 
 
@@ -101,10 +101,13 @@ const deleteHandler = function () {
 
 /* Слушатели событий  */
 
+// открытие и закрытие форм
 openPopup.addEventListener('click', openAndCloseForm);
 closePopup.addEventListener('click', openAndCloseForm);
-popupEditProfileBtn.addEventListener('click', openPopupEditProfile);
-closeEditProfile.addEventListener('click', closePopupEditForm);
+popupEditProfileBtn.addEventListener('click', openAndCloseEditForm);
+closeEditProfile.addEventListener('click', openAndCloseEditForm);
+
+//
 placesList.addEventListener('click', likeHandler);
 placesList.addEventListener('click', deleteHandler);
 popupForm.addEventListener('submit', function (event) {
