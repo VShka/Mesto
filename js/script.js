@@ -56,9 +56,6 @@ const openAndCloseForm = function () {
 const openAndCloseEditForm = function () {
   popupEditProfile.classList.toggle('popup_is-opened');
 };
-/*const closePopupEditForm = function () {
-  popupEditProfile.classList.remove('popup_is-opened');
-}*/
 /* 4. Лайк */
 
 
@@ -107,8 +104,10 @@ closePopup.addEventListener('click', openAndCloseForm);
 popupEditProfileBtn.addEventListener('click', openAndCloseEditForm);
 closeEditProfile.addEventListener('click', openAndCloseEditForm);
 
-//
+// лайки
 placesList.addEventListener('click', likeHandler);
+
+// удаление карточек
 placesList.addEventListener('click', deleteHandler);
 popupForm.addEventListener('submit', function (event) {
   addCard(event, renderCard);
