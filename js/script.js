@@ -8,6 +8,7 @@ const placesList = document.querySelector('.places-list');
 const placeCard = placesList.querySelector('.place-card');
 const popup = document.querySelector('.popup');
 const closePopup = popup.querySelector('.popup__close');
+const closeEditProfile = document.querySelector('.popup__close_edit-profile');
 const popupForm = document.forms.new;
 
 
@@ -55,6 +56,9 @@ const openAndCloseForm = function () {
 const openPopupEditProfile = function () {
   popupEditProfile.classList.add('popup_is-opened');
 };
+const closePopupEditForm = function () {
+  popupEditProfile.classList.remove('popup_is-opened');
+}
 /* 4. Лайк */
 
 
@@ -98,9 +102,9 @@ const deleteHandler = function () {
 /* Слушатели событий  */
 
 openPopup.addEventListener('click', openAndCloseForm);
+closePopup.addEventListener('click', openAndCloseForm);
 popupEditProfileBtn.addEventListener('click', openPopupEditProfile);
-closePopup.addEventListener('click', openAndCloseForm);
-closePopup.addEventListener('click', openAndCloseForm);
+closeEditProfile.addEventListener('click', closePopupEditForm);
 placesList.addEventListener('click', likeHandler);
 placesList.addEventListener('click', deleteHandler);
 popupForm.addEventListener('submit', function (event) {
