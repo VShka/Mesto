@@ -2,13 +2,10 @@
 
 const profile = document.querySelector('.profile');
 const openPopup = profile.querySelector('.user-info__button');
-const popupEditProfileBtn = profile.querySelector('.edit-profile__button');
-const popupEditProfile = document.querySelector('.popup__edit-profile');
 const placesList = document.querySelector('.places-list');
 const placeCard = placesList.querySelector('.place-card');
 const popup = document.querySelector('.popup');
 const closePopup = popup.querySelector('.popup__close');
-const closeEditProfile = document.querySelector('.popup__close_edit-profile');
 const popupForm = document.forms.new;
 
 
@@ -18,7 +15,6 @@ const popupForm = document.forms.new;
 /* 1. Десять карточек «из коробки» */
 
 // функция возвращает разметку карточки, которую впоследствии будем отрисовывать при загрузке страницы 
-
 const getImgCard = function (obj) {
   return `<div class="place-card">
                 <div class="place-card__image" style="background-image: url(${obj.link})">
@@ -32,7 +28,6 @@ const getImgCard = function (obj) {
 };
 
 // отрисовка разметки карточки в html
-
 const renderCard = function (obj) {
   const template = getImgCard(obj);
   placesList.insertAdjacentHTML('beforeend', template);
@@ -49,18 +44,13 @@ initialCardsToDisplay(initialCards);
 /* 2. Открытие формы и 3. Закрытие формы */
 
 // переключает класс и собственно открывает или закрывает форму
-
 const openAndCloseForm = function () {
   popup.classList.toggle('popup_is-opened');
 };
-const openAndCloseEditForm = function () {
-  popupEditProfile.classList.toggle('popup_is-opened');
-};
+
 /* 4. Лайк */
 
-
 // делегирует собитие на все добавленные элементы и добавляет или убирает лайк
-
 const likeHandler = function (event) {
   if (event.target.classList.contains('place-card__like-icon')) {
     event.target.classList.toggle('place-card__like-icon_liked');
@@ -70,7 +60,6 @@ const likeHandler = function (event) {
 /* 5. Добавление карточки */
 
 // используем функцию getImgCard и добавляем элемент
-
 const addCard = function (event, doneField) {
   // убрать перезагрузку страницы
   event.preventDefault();
@@ -88,7 +77,6 @@ const addCard = function (event, doneField) {
 /* 6. Удаление карточки */
 
 // делегирует, проверяет был ли клик внутри элемента place-card и удаляет элемент 
-
 const deleteHandler = function () {
   const placeCard = event.target.closest('.place-card')
   if (event.target.classList.contains('place-card__delete-icon')) {
@@ -101,8 +89,6 @@ const deleteHandler = function () {
 // открытие и закрытие форм
 openPopup.addEventListener('click', openAndCloseForm);
 closePopup.addEventListener('click', openAndCloseForm);
-popupEditProfileBtn.addEventListener('click', openAndCloseEditForm);
-closeEditProfile.addEventListener('click', openAndCloseEditForm);
 
 // лайки
 placesList.addEventListener('click', likeHandler);
