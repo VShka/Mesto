@@ -100,15 +100,3 @@ placesList.addEventListener('click', deleteHandler);
 popupForm.addEventListener('submit', function (event) {
   addCard(event, renderCard);
 })
-
-/**
- * Здравствуйте
- * Очень хорошая работа. Не ожидал
- *
- * Правильно что используете делегирование
- *
- * Хорошо что используете preventDefault()
- *
- *
- *
- */
