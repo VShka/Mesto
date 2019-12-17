@@ -93,8 +93,10 @@ closePopup.addEventListener('click', openAndCloseForm);
 // лайки
 placesList.addEventListener('click', likeHandler);
 
-// удаление карточек
+// удаление карточки
 placesList.addEventListener('click', deleteHandler);
+
+// добавление карточки
 popupForm.addEventListener('submit', function (event) {
   addCard(event, renderCard);
 })
