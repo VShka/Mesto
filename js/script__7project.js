@@ -49,7 +49,7 @@ const defaultFormValue = function () {
 
 // открывает и закрывает всплывающую картинку
 const openAndClosePopupImage = function (event) {
-    if(event.target.classList.contains('place-card__image')) {
+    if(event.target.closest('.place-card')) {
         popupTypeImage.classList.toggle('popup_is-opened');
         popupImage.setAttribute(`src`, `${event.target.style.backgroundImage.slice(5, -2)}`);
     }

@@ -99,4 +99,4 @@ placesList.addEventListener('click', deleteHandler);
 // добавление карточки
 popupForm.addEventListener('submit', function (event) {
   addCard(event, renderCard);
-})
+}) 
