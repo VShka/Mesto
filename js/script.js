@@ -77,21 +77,12 @@ const addCard = function (event, doneField) {
 /* 6. Удаление карточки */
 
 // делегирует, проверяет был ли клик внутри элемента place-card и удаляет элемент 
-//код оптимизирован
-const deleteHandler = function (event) {
-  if (event.target.classList.contains('place-card__delete-icon')) {
-    placesList.removeChild(placeCard);
-  }
-};
-
-
-
-/* const deleteHandler = function () {
+const deleteHandler = function () {
   const placeCard = event.target.closest('.place-card')
   if (event.target.classList.contains('place-card__delete-icon')) {
     placesList.removeChild(placeCard);
   }
-};*/
+};
 
 /* Слушатели событий  */
 
