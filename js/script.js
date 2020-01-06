@@ -3,7 +3,7 @@
 const profile = document.querySelector('.profile');
 const openPopup = profile.querySelector('.user-info__button');
 const placesList = document.querySelector('.places-list');
-const placeCard = placesList.querySelector('.place-card');
+const placeCard = document.querySelector('.place-card');
 const popup = document.querySelector('.popup');
 const closePopup = popup.querySelector('.popup__close');
 const popupForm = document.forms.new;
@@ -47,6 +47,11 @@ initialCardsToDisplay(initialCards);
 const openAndCloseForm = function () {
   popup.classList.toggle('popup_is-opened');
 };
+const closeFormEsc = function (event) {
+  if(event.key === 'Escape') {
+    popup.classList.remove('popup_is-opened');
+  }
+};
 
 /* 4. Лайк */
 
@@ -89,6 +94,7 @@ const deleteHandler = function () {
 // открытие и закрытие форм
 openPopup.addEventListener('click', openAndCloseForm);
 closePopup.addEventListener('click', openAndCloseForm);
+document.addEventListener('keydown', closeFormEsc);
 
 // лайки
 placesList.addEventListener('click', likeHandler);
