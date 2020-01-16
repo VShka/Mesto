@@ -19,8 +19,6 @@ const placeCardName = document.querySelector('.place-card');
 const closeImage = document.querySelector('.close__image');
 const placeCardImage = document.querySelector('.place-card__image');
 
-const formLink = popupForm.elements.link;
-
 /* Функции */
 
 
@@ -70,6 +68,10 @@ const closePopupImage = function () {
     }
 };
 
+/* Валидация */
+
+
+
 
 /* События */
 
@@ -83,7 +85,3 @@ placesList.addEventListener('click', openPopupImage);
 closeImage.addEventListener('click', closePopupImage);
 document.addEventListener('keydown', closeEditFormEsc);
 document.addEventListener('keydown', closePopupImage);
-
-
-
-

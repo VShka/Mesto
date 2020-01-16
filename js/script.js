@@ -7,6 +7,7 @@ const placeCard = document.querySelector('.place-card');
 const popup = document.querySelector('.popup');
 const closePopup = popup.querySelector('.popup__close');
 const popupForm = document.forms.new;
+const popupBtn = document.querySelector('.popup__button');
 
 
 /* Функции */
@@ -89,6 +90,24 @@ const deleteHandler = function () {
   }
 };
 
+/* Валидация */
+
+const activeDisableBtnForm = function() {
+  const formName = event.currentTarget.elements.name;
+  const editFormName = event.currentTarget.elements.name;
+  const formLink = event.currentTarget.elements.link;
+  const formAbout = event.currentTarget.elements.about;
+
+  if(formName.value.length !== 0 || formLink.value.length !== 0) {
+      popupBtn.removeAttribute('disabled');
+      popupBtn.classList.add('.popup__button_active');
+  } else {
+      popupBtn.setAttribute('disabled', true);
+      popupBtn.classList.remove('.popup__button_active')
+      
+  }
+};
+
 /* Слушатели событий  */
 
 // открытие и закрытие форм
@@ -106,3 +125,7 @@ placesList.addEventListener('click', deleteHandler);
 popupForm.addEventListener('submit', function (event) {
   addCard(event, renderCard);
 }) 
+
+// добавление и удаление активной кнопки
+
+popupForm.addEventListener('input', activeDisableBtnForm);
