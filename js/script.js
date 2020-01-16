@@ -7,7 +7,8 @@ const placeCard = document.querySelector('.place-card');
 const popup = document.querySelector('.popup');
 const closePopup = popup.querySelector('.popup__close');
 const popupForm = document.forms.new;
-const popupBtn = document.querySelector('.popup__button');
+const [formName, formLink] = popupForm.elements;
+const btnAddPlace = document.querySelector('.btn__add-place');
 
 
 /* Функции */
@@ -67,16 +68,17 @@ const likeHandler = function (event) {
 
 // используем функцию getImgCard и добавляем элемент
 const addCard = function (event, doneField) {
-  // убрать перезагрузку страницы
   event.preventDefault();
-  // нужно получить значения полей ввода
+
   const formName = popupForm.elements.name;
   const formLink = popupForm.elements.link;
-
 
   doneField({ name: formName.value, link: formLink.value });
   popup.classList.remove('popup_is-opened');
   popupForm.reset();
+
+  btnAddPlace.setAttribute('disabled', true);
+  btnAddPlace.classList.add('popup__button_disabled');
 };
 
 
@@ -90,21 +92,47 @@ const deleteHandler = function () {
   }
 };
 
-/* Валидация */
+/* Валидация кнопки */
 
-const activeDisableBtnForm = function() {
-  const formName = event.currentTarget.elements.name;
-  const editFormName = event.currentTarget.elements.name;
-  const formLink = event.currentTarget.elements.link;
-  const formAbout = event.currentTarget.elements.about;
+/* --------------------------------------------------- 
+Прошу обратить внимание на данную функцию!!! 
+        Одна функция на две формы для валидации кнопок
+        1 вопрос: стоит ли писать такие громоздкие функции с целью DRY 
+        2 вопрос: она работает, но неправильно, возможно проблемы с условием, не могу понять как заставить работать правильно.
+*/
 
-  if(formName.value.length !== 0 || formLink.value.length !== 0) {
-      popupBtn.removeAttribute('disabled');
-      popupBtn.classList.add('.popup__button_active');
+/* 
+const disableBtnForm = function() {
+  const popupBtn = document.querySelectorAll('.popup__button');
+
+  const formName = popupForm.elements.name;
+  const formLink = popupForm.elements.link;
+
+  if ((name.value.length === 0 || about.value.length === 0) || (formName.value.length !== 0 || formLink.value.length !== 0)) {
+    popupBtn.forEach( function (item) {
+      item.setAttribute('disabled', true)
+    });
+    popupBtn.forEach( function (item) {
+      item.classList.add('popup__button_disabled')
+    });
   } else {
-      popupBtn.setAttribute('disabled', true);
-      popupBtn.classList.remove('.popup__button_active')
-      
+    popupBtn.forEach( function (item) {
+      item.removeAttribute('disabled')
+    });
+    popupBtn.forEach( function (item) {
+      item.classList.remove('popup__button_disabled')
+    });
+  }
+}; 
+----------------------------------------------------------------*/ 
+
+const disableBtnForm = function() {
+  if(formName.value.length === 0 || formLink.value.length === 0) {
+    btnAddPlace.setAttribute('disabled', true);
+    btnAddPlace.classList.add('popup__button_disabled')
+  } else {
+    btnAddPlace.removeAttribute('disabled');
+    btnAddPlace.classList.remove('popup__button_disabled');
   }
 };
 
@@ -126,6 +154,13 @@ popupForm.addEventListener('submit', function (event) {
   addCard(event, renderCard);
 }) 
 
-// добавление и удаление активной кнопки
+// активация и дезактивация кнопки -------------
+popupForm.addEventListener('input', disableBtnForm);
 
-popupForm.addEventListener('input', activeDisableBtnForm);
+/*
+const form = document.querySelectorAll('.popup__form');
+
+form.forEach( function (item) {
+  item.addEventListener('input', disableBtnForm);
+});
+----------------------------------------------------*/

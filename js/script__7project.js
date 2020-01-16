@@ -19,6 +19,11 @@ const placeCardName = document.querySelector('.place-card');
 const closeImage = document.querySelector('.close__image');
 const placeCardImage = document.querySelector('.place-card__image');
 
+// кнопка сохранения данных профиля
+const btnSaveProfile = document.querySelector('.btn__save-profile');
+
+
+
 /* Функции */
 
 
@@ -45,17 +50,19 @@ const editProfile = function (event) {
 const defaultFormValue = function () {
     name.value = userInfoName.textContent;
     about.value = userInfoJob.textContent;
+
+    btnSaveProfile.removeAttribute('disabled');
+    btnSaveProfile.classList.remove('popup__button_disabled');
 };
 
 // открывает и закрывает всплывающую картинку
-
 const openPopupImage = function (event) {
     if (event.target.closest('.place-card')) {
         if(event.target.classList.contains('place-card__image')) {
             popupTypeImage.classList.add('popup_is-opened');
-
-            // < не могу понять > Почему некоторые картинки при открытии больше, чем другие. ИКОНКА ЗАКРЫТИЯ ПРОПАДАЕТ. Видимо проблема с размерами. Возможно необходимо привести их к общему размеру
             popupImage.setAttribute('src', `${event.target.style.backgroundImage.slice(5, -2)}`);
+            popupImage.style.maxWidth = '80vw';
+            popupImage.style.maxHeight = '80vh';
         }
     }
 };
@@ -71,6 +78,18 @@ const closePopupImage = function () {
 /* Валидация */
 
 
+// активирует и дезактивирует кнопку 
+const disableBtnEditForm = function() {
+
+    if (name.value.length === 0 || about.value.length === 0) {
+        btnSaveProfile.setAttribute('disabled', true);
+        btnSaveProfile.classList.add('popup__button_disabled');
+    } else {
+        btnSaveProfile.removeAttribute('disabled');
+        btnSaveProfile.classList.remove('popup__button_disabled');
+    }
+};
+
 
 
 /* События */
@@ -85,3 +104,8 @@ placesList.addEventListener('click', openPopupImage);
 closeImage.addEventListener('click', closePopupImage);
 document.addEventListener('keydown', closeEditFormEsc);
 document.addEventListener('keydown', closePopupImage);
+
+// активация и дезактивация кнопки
+popupEditForm.addEventListener('input', disableBtnEditForm);
+
+// валидация 
