@@ -22,8 +22,6 @@ const placeCardImage = document.querySelector('.place-card__image');
 // кнопка сохранения данных профиля
 const btnSaveProfile = document.querySelector('.btn__save-profile');
 
-
-
 /* Функции */
 
 
@@ -75,13 +73,13 @@ const closePopupImage = function () {
     }
 };
 
-/* Валидация */
-
-
 // активирует и дезактивирует кнопку 
 const disableBtnEditForm = function() {
 
     if (name.value.length === 0 || about.value.length === 0) {
+        btnSaveProfile.setAttribute('disabled', true);
+        btnSaveProfile.classList.add('popup__button_disabled');
+    } else if (name.value.length < 2 || about.value.length > 30) {
         btnSaveProfile.setAttribute('disabled', true);
         btnSaveProfile.classList.add('popup__button_disabled');
     } else {
@@ -89,8 +87,6 @@ const disableBtnEditForm = function() {
         btnSaveProfile.classList.remove('popup__button_disabled');
     }
 };
-
-
 
 /* События */
 
@@ -107,5 +103,3 @@ document.addEventListener('keydown', closePopupImage);
 
 // активация и дезактивация кнопки
 popupEditForm.addEventListener('input', disableBtnEditForm);
-
-// валидация 
