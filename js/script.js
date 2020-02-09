@@ -94,38 +94,6 @@ const deleteHandler = function () {
 
 /* Валидация кнопки*/
 
-/* --------------------------------------------------- 
-Прошу обратить внимание на данную функцию!!! 
-        Одна функция на две формы для валидации кнопок
-        1 вопрос: стоит ли писать такие громоздкие функции с целью DRY 
-        2 вопрос: она работает, но неправильно, возможно проблемы с условием, не могу понять как заставить работать правильно.
-*/
-
-/* 
-const disableBtnForm = function() {
-  const popupBtn = document.querySelectorAll('.popup__button');
-
-  const formName = popupForm.elements.name;
-  const formLink = popupForm.elements.link;
-
-  if ((name.value.length === 0 || about.value.length === 0) || (formName.value.length !== 0 || formLink.value.length !== 0)) {
-    popupBtn.forEach( function (item) {
-      item.setAttribute('disabled', true)
-    });
-    popupBtn.forEach( function (item) {
-      item.classList.add('popup__button_disabled')
-    });
-  } else {
-    popupBtn.forEach( function (item) {
-      item.removeAttribute('disabled')
-    });
-    popupBtn.forEach( function (item) {
-      item.classList.remove('popup__button_disabled')
-    });
-  }
-}; 
-----------------------------------------------------------------*/ 
-
 const disableBtnForm = function() {
   if(formName.value.length === 0 || formLink.value.length === 0) {
     btnAddPlace.setAttribute('disabled', true);
