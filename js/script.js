@@ -35,7 +35,8 @@ const renderCard = function (obj) {
   placesList.insertAdjacentHTML('beforeend', template);
 };
 
-// перебор по массиву с коллбеком, который берет значения каждого элемента массива
+// перебор по массиву с коллбеком, который берет значения каждого элемента массива и отрисовывает карточки
+// при загрузке страницы
 const initialCardsToDisplay = function (arrCards) {
     arrCards.forEach(function (card) {
       renderCard(card);
@@ -124,11 +125,3 @@ popupForm.addEventListener('submit', function (event) {
 
 // активация и дезактивация кнопки -------------
 popupForm.addEventListener('input', disableBtnForm);
-
-/*
-const form = document.querySelectorAll('.popup__form');
-
-form.forEach( function (item) {
-  item.addEventListener('input', disableBtnForm);
-});
-----------------------------------------------------*/
