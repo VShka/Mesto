@@ -1,27 +1,29 @@
 class CardList {
-    constructor(container, initialCards) {
+    constructor(container, cardTemplate) {
       this.container = container;
-      this.initialCards = initialCards;
+      this.cardTemplate = cardTemplate;
     }
-
+     // добавляет карточку в список
     addCard(name, link) {
-      const card = this.initialCards.create(
-          name,
-          link
-      )
+      const template = this.cardTemplate.create(name, link);
 
-      this.container.insertAdjacentHTML('beforeend', card);
+      this.container.insertAdjacentHTML('beforeend', template);
     }
-
-    render(initialCards) {
-      this.initialCards = initialCards;
-      this.initialCards.forEach((card) => {
-          this.addCard(card.name, card.link)
+     // отрисовывает карточки при загрузке страницы
+    render(arrCards) {
+      arrCards.forEach(card => {
+        this.addCard(card.name, card.link);
       })
     }
 }
+// экземпляр контейнера 
+const cardList = new CardList(placesList, card);
 
-const cardList = new CardList(
-    document.querySelector('.places-list'),
-    card
-);
+// передаем методу массив карточек и отрисовываем при загрузке в нашем контейнере
+cardList.render(initialCards);
+
+// лайк и удаление карточки
+cardList.container.addEventListener('click', event => {
+  card.like(event);
+  card.remove(event);
+});
