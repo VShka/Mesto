@@ -3,19 +3,42 @@ class CardList {
       this.container = container;
       this.cardTemplate = cardTemplate;
     }
-     // добавляет карточку в список
+
+     // добавляет карточку
     addCard(name, link) {
+      // используем метод create экземпляра сard 
       const template = this.cardTemplate.create(name, link);
 
       this.container.insertAdjacentHTML('beforeend', template);
     }
+
      // отрисовывает карточки при загрузке страницы
     render(arrCards) {
       arrCards.forEach(card => {
         this.addCard(card.name, card.link);
       })
     }
-    
+
+    // добавление 1 карточки из формы
+    addCardForm(event) {
+      // сбрасываем поведение по умолчанию у нашей формы
+      event.preventDefault();
+
+      // получаем значение полей формы
+      const name = formName.value;
+      const link = formLink.value;
+
+      // используем метод экземпляра cardList
+      cardList.addCard(name, link);
+
+      // сбрасываем форму и закрываем
+      popup.classList.remove('popup_is-opened');
+      popupForm.reset();
+
+      // валидация кнопки
+      btnAddPlace.setAttribute('disabled', true);
+      btnAddPlace.classList.add('popup__button_disabled');
+    }
 }
 // экземпляр контейнера 
 const cardList = new CardList(placesList, card);
@@ -23,20 +46,9 @@ const cardList = new CardList(placesList, card);
 // передаем методу массив карточек и отрисовываем при загрузке в нашем контейнере
 cardList.render(initialCards);
 
-
-popupForm.addEventListener('submit', (event) => {
-  event.preventDefault();
-
-  const name = formName.value;
-  const link = formLink.value;
-
-  cardList.addCard(name, link);
-
-  popup.classList.remove('popup_is-opened');
-  popupForm.reset();
-
-  btnAddPlace.setAttribute('disabled', true);
-  btnAddPlace.classList.add('popup__button_disabled');
+// добавляем 1 карточку
+popupForm.addEventListener('submit', () => {
+  cardList.addCardForm(event);
 });
 
 // лайк и удаление карточки
