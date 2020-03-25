@@ -24,6 +24,9 @@ class CardList {
       // сбрасываем поведение по умолчанию у нашей формы
       event.preventDefault();
 
+      // окно добавления карточки
+      const popupTypePlace = document.querySelector('.popup_type_place');
+
       // получаем значение полей формы
       const name = formName.value;
       const link = formLink.value;
@@ -32,7 +35,7 @@ class CardList {
       cardList.addCard(name, link);
 
       // сбрасываем форму и закрываем
-      popup.classList.remove('popup_is-opened');
+      popupTypePlace.classList.remove('popup_is-opened');
       popupForm.reset();
 
       // валидация кнопки
