@@ -4,7 +4,7 @@ class Popup {
     }
 
     open(event) {
-        if(event.target.classList.contains('user-info__button')) {
+        if(event.target.classList.contains('popup__btn')) {
             this.container.classList.add('popup_is-opened');
         }
     }
@@ -24,20 +24,37 @@ class Popup {
 
 // экземпляр формы добавления нового места
 const place = new Popup(document.querySelector('.popup_type_place'));
+const edit = new Popup(document.querySelector('.popup__edit-profile'));
 
-// открытие окна добавления места
-document.querySelector('.user-info__button')
-.addEventListener('click', event => {
-    place.open(event);
+// открытие форм place и edit
+document.querySelectorAll('.popup__btn')
+ // получаем массив с искомым классом
+.forEach(item => {  
+    // перебираем массив и проверяем на условие
+    if(item.classList.contains('user-info__button')) {
+        item.addEventListener('click', event => { 
+            // вешаем обработчик и привязываем метод
+            place.open(event);
+        })
+    } else {
+        item.addEventListener('click', event => {  
+            // вешаем обработчик и привязываем метод
+            edit.open(event);
+        })
+    }
 })
 
-// закрытие окна добавления места
-document.querySelector('.popup__close')
-.addEventListener('click', event => {
-    place.close(event);
+// закрытие форм place и edit
+document.querySelectorAll('.popup__close')
+.forEach(item => {
+    item.addEventListener('click', event => {
+        place.close(event);
+        edit.close(event);
+    })
 })
 
-// закрытие формы клавишей Escape
+// закрытие форм клавишей Escape
 document.addEventListener('keydown', event => {
     place.closeFormEsc(event);
+    edit.closeFormEsc(event);
 })
