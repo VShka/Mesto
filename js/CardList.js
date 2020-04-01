@@ -50,7 +50,7 @@ const cardList = new CardList(placesList, card);
 cardList.render(initialCards);
 
 // добавляем 1 карточку
-popupForm.addEventListener('submit', () => {
+popupForm.addEventListener('submit', (event) => {
   cardList.addCardForm(event);
 });
 

@@ -8,9 +8,6 @@ const [formName, formLink] = popupForm.elements;
 const btnAddPlace = document.querySelector('.btn__add-place');
 
 
-/* Функции */
-
-
 
 /* Валидация кнопки*/
 
