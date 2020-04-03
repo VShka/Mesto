@@ -2,7 +2,6 @@
 
 // форма редактирования профиля
 const popupEditProfileBtn = profile.querySelector('.edit-profile__button');
-const popupEditProfile = document.querySelector('.popup__edit-profile');
 const popupEditForm = document.forms.edit;
 const [name, about] = popupEditForm.elements;
 
@@ -28,7 +27,8 @@ const editProfile = function (event) {
     event.preventDefault();
     userInfoName.textContent = `${name.value}`;
     userInfoJob.textContent = `${about.value}`;
-    popupEditProfile.classList.remove('popup_is-opened');
+    // закрытие формы при сабмите
+    //popupEditProfile.classList.remove('popup_is-opened');
 };
 
 // подставляет в форму текущие значения полей
@@ -80,7 +80,7 @@ const disableBtnEditForm = function() {
 
 popupEditProfileBtn.addEventListener('click', defaultFormValue);
 popupEditForm.addEventListener('submit', editProfile);
-placesList.addEventListener('click', openPopupImage);
+//placesList.addEventListener('click', openPopupImage);
 closeImage.addEventListener('click', closePopupImage);
 document.addEventListener('keydown', closePopupImage);
 

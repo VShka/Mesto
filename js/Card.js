@@ -1,6 +1,5 @@
 class Card {
     constructor() {
-
     }
 // создание карточки
     create(name, link) {
@@ -27,5 +26,3 @@ class Card {
         };
     }
 }
-// экземпляр карточки
-const card = new Card();
