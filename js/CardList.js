@@ -25,7 +25,6 @@ class CardList {
       const name = formName.value;
       const link = formLink.value;
 
-      // используем метод экземпляра cardList
       cardList._addCard(name, link);
 
       // валидация кнопки

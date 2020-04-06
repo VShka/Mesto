@@ -1,19 +1,22 @@
 class Popup {
-    constructor(container) {
+    constructor(container, openFormButton, form) {
         this.container = container;
+        this.openFormButton = openFormButton;
+        this.form = form;
     }
 
-    open(event, openFormButton) {
-        if(event.target.classList.contains(openFormButton)) {
+    open(event) {
+        if(event.target.classList.contains(this.openFormButton)) {
             this.container.classList.add('popup_is-opened');
         }
     }
 
-    close(event, form) {
+    close(event) {
         if(event.target.classList.contains('popup__close')) {
             this.container.classList.remove('popup_is-opened');
-        } else if(form == form){
-            form.classList.remove('popup_is-opened')
+            // проверка условия при сабмите
+        } else if(this.form == this.form){
+            this.form.classList.remove('popup_is-opened')
         } 
     }
 

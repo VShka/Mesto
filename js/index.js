@@ -6,20 +6,26 @@ const placesList = document.querySelector('.places-list');
 // экземпляр контейнера 
 const cardList = new CardList(placesList, card);
 
-// форма добавления нового места
-
 // экземпляр действия с формой
 const formAction = new FormAction(popupForm);
 
 // контейнер попап добавления карточки
 const popupTypePlace = document.querySelector('.popup_type_place');
-// экземпляр класса PopupPlace
-const placePopup = new Popup(popupTypePlace);
+// экземпляр класса Popup
+const placePopup = new Popup(
+  popupTypePlace,
+  'user-info__button',
+  popupTypePlace
+);
 
 // контейнер попап редактирования профиля
 const popupEditProfile = document.querySelector('.popup__edit-profile');
-// экземпляр класса PopupEdit
-const editPopup = new Popup(popupEditProfile);
+// экземпляр класса Popup
+const editPopup = new Popup(
+  popupEditProfile,
+  'edit-profile__button',
+  popupEditProfile
+);
 
 
 /* методы работы с карточками */
@@ -29,7 +35,7 @@ const editPopup = new Popup(popupEditProfile);
 cardList.render(initialCards);
 
 // добавляем 1 карточку
-popupForm.addEventListener('submit', () => {
+popupForm.addEventListener('submit', (event) => {
     //добавление карточки
   cardList.addCardForm();
     //сброс дефолтного поведения формы
@@ -37,11 +43,11 @@ popupForm.addEventListener('submit', () => {
     //сброс полей формы после сабмита
   formAction.resetFormFields();
     //закрытие попапа после сабмита
-  placePopup.close(event, popupTypePlace);
+  placePopup.close(event);
 });
 
 // лайк и удаление карточки
-cardList.container.addEventListener('click', () => {
+cardList.container.addEventListener('click', (event) => {
   card.like(event);
   card.remove(event);
 });
@@ -52,27 +58,27 @@ cardList.container.addEventListener('click', () => {
 
 // открытие попапа place
 document.querySelector('.user-info__button')
-.addEventListener('click', () => {
-  placePopup.open(event, 'user-info__button');
+.addEventListener('click', (event) => {
+  placePopup.open(event);
 })
 
 // открытие попапа edit
 document.querySelector('.edit-profile__button')
-.addEventListener('click', () => {
-  editPopup.open(event, 'edit-profile__button');
+.addEventListener('click', (event) => {
+  editPopup.open(event);
 })
 
 // закрытие попап place/edit
 document.querySelectorAll('.popup__close')
 .forEach(item => {
-    item.addEventListener('click', event => {
+    item.addEventListener('click', (event) => {
       placePopup.close(event);
       editPopup.close(event);
     })
 })
 
 // закрытие попап place/edit клавишей Escape
-document.addEventListener('keydown', () => {
+document.addEventListener('keydown', (event) => {
   placePopup.closeFormEsc(event);
   editPopup.closeFormEsc(event);
 })
