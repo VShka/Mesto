@@ -9,7 +9,7 @@ class CardList {
       // используем метод create экземпляра сard 
       const template = this._cardTemplate.create(name, link);
 
-      this.container.insertAdjacentHTML('beforeend', template);
+      this.container.insertAdjacentElement('beforeend', template);
     }
 
      // отрисовывает карточки из массива при загрузке страницы
