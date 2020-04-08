@@ -27,18 +27,21 @@ create(name, link) {
     cardDescription.appendChild(cardName);
     cardDescription.appendChild(buttonLike);
     
+    cardContainer.querySelector('.place-card__like-icon').addEventListener('click', () => {
+        this.like(event);
+    });
+    cardContainer.querySelector('.place-card__delete-icon').addEventListener('click', () => {
+        this.remove(event);
+    });
+
     return cardContainer;
 }
 // лайк/дизлайк
     like(event) {
-      if (event.target.classList.contains('place-card__like-icon')) {
-          event.target.classList.toggle('place-card__like-icon_liked');
-      };
+        event.target.classList.toggle('place-card__like-icon_liked');
     }
 // удаление карточки
     remove(event) {
-        if (event.target.classList.contains('place-card__delete-icon')) {
-            event.target.closest('.place-card').remove();
-        };
+        event.target.closest('.place-card').remove();
     }
 }

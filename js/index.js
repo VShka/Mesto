@@ -46,12 +46,6 @@ popupForm.addEventListener('submit', (event) => {
   placePopup.close(event);
 });
 
-// лайк и удаление карточки
-cardList.container.addEventListener('click', (event) => {
-  card.like(event);
-  card.remove(event);
-});
-
 
 /* методы работы с попап */
 

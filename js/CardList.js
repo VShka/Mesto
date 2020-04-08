@@ -24,9 +24,8 @@ class CardList {
       // получаем значение полей формы
       const name = formName.value;
       const link = formLink.value;
-
+      
       cardList._addCard(name, link);
-
       // валидация кнопки
       btnAddPlace.setAttribute('disabled', true);
       btnAddPlace.classList.add('popup__button_disabled');
