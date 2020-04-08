@@ -2,8 +2,6 @@
 
 // форма редактирования профиля
 const popupEditProfileBtn = profile.querySelector('.edit-profile__button');
-const popupEditProfile = document.querySelector('.popup__edit-profile');
-const closeEditProfile = document.querySelector('.popup__close_edit-profile');
 const popupEditForm = document.forms.edit;
 const [name, about] = popupEditForm.elements;
 
@@ -24,24 +22,13 @@ const btnSaveProfile = document.querySelector('.btn__save-profile');
 
 /* Функции */
 
-
-// открывает и закрывает форму редактирования профиля
-const openAndCloseEditForm = function () {
-    popupEditProfile.classList.toggle('popup_is-opened');
-    
-};
-const closeEditFormEsc = function (event) {
-    if(event.key === 'Escape') {
-        popupEditProfile.classList.remove('popup_is-opened');
-    }
-};
-
 // редактирование информации о себе 
 const editProfile = function (event) {
     event.preventDefault();
     userInfoName.textContent = `${name.value}`;
     userInfoJob.textContent = `${about.value}`;
-    popupEditProfile.classList.remove('popup_is-opened');
+    // закрытие формы при сабмите
+    //popupEditProfile.classList.remove('popup_is-opened');
 };
 
 // подставляет в форму текущие значения полей
@@ -91,14 +78,10 @@ const disableBtnEditForm = function() {
 /* События */
 
 
-// открытие и закрытие формы
-popupEditProfileBtn.addEventListener('click', openAndCloseEditForm);
 popupEditProfileBtn.addEventListener('click', defaultFormValue);
-closeEditProfile.addEventListener('click', openAndCloseEditForm);
 popupEditForm.addEventListener('submit', editProfile);
-placesList.addEventListener('click', openPopupImage);
+//placesList.addEventListener('click', openPopupImage);
 closeImage.addEventListener('click', closePopupImage);
-document.addEventListener('keydown', closeEditFormEsc);
 document.addEventListener('keydown', closePopupImage);
 
 // активация и дезактивация кнопки

@@ -1,14 +1,10 @@
 /* Переменные */
 
 const profile = document.querySelector('.profile');
-const placesList = document.querySelector('.places-list');
-const placeCard = document.querySelector('.place-card');
 const popupForm = document.forms.new;
+const placeCard = document.querySelector('.place-card');
 const [formName, formLink] = popupForm.elements;
 const btnAddPlace = document.querySelector('.btn__add-place');
-
-
-/* Функции */
 
 
 
