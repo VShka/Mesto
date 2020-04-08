@@ -10,12 +10,6 @@ const userInfo = profile.querySelector('.user-info');
 const userInfoName = userInfo.querySelector('.user-info__name');
 const userInfoJob = userInfo.querySelector('.user-info__job');
 
-// данные всплывающей картинки
-const popupTypeImage = document.querySelector('.popup_type_image');
-const popupImage = document.querySelector('.popup__image');
-const placeCardName = document.querySelector('.place-card');
-const closeImage = document.querySelector('.close__image');
-const placeCardImage = document.querySelector('.place-card__image');
 
 // кнопка сохранения данных профиля
 const btnSaveProfile = document.querySelector('.btn__save-profile');
@@ -40,26 +34,6 @@ const defaultFormValue = function () {
     btnSaveProfile.classList.remove('popup__button_disabled');
 };
 
-// открывает и закрывает всплывающую картинку
-const openPopupImage = function (event) {
-    if (event.target.closest('.place-card')) {
-        if(event.target.classList.contains('place-card__image')) {
-            popupTypeImage.classList.add('popup_is-opened');
-            popupImage.setAttribute('src', `${event.target.style.backgroundImage.slice(5, -2)}`);
-            popupImage.style.maxWidth = '80vw';
-            popupImage.style.maxHeight = '80vh';
-        }
-    }
-};
-
-const closePopupImage = function () {
-    if(event.key === 'Escape') {
-        popupTypeImage.classList.remove('popup_is-opened');
-    } else {
-        popupTypeImage.classList.remove('popup_is-opened');
-    }
-};
-
 // активирует и дезактивирует кнопку 
 const disableBtnEditForm = function() {
 
@@ -80,9 +54,6 @@ const disableBtnEditForm = function() {
 
 popupEditProfileBtn.addEventListener('click', defaultFormValue);
 popupEditForm.addEventListener('submit', editProfile);
-//placesList.addEventListener('click', openPopupImage);
-closeImage.addEventListener('click', closePopupImage);
-document.addEventListener('keydown', closePopupImage);
 
 // активация и дезактивация кнопки
 popupEditForm.addEventListener('input', disableBtnEditForm);

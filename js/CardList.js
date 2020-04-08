@@ -8,7 +8,7 @@ class CardList {
     _addCard(name, link) {
       // используем метод create экземпляра сard 
       const template = this._cardTemplate.create(name, link);
-
+      
       this.container.insertAdjacentElement('beforeend', template);
     }
 

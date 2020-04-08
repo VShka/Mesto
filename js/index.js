@@ -6,12 +6,12 @@ const placesList = document.querySelector('.places-list');
 // экземпляр контейнера 
 const cardList = new CardList(placesList, card);
 
-// экземпляр действия с формой
+// экземпляр класса действия с формой
 const formAction = new FormAction(popupForm);
 
 // контейнер попап добавления карточки
 const popupTypePlace = document.querySelector('.popup_type_place');
-// экземпляр класса Popup
+// экземпляр класса Popup для формы добавления карточки
 const placePopup = new Popup(
   popupTypePlace,
   'user-info__button',
@@ -20,11 +20,20 @@ const placePopup = new Popup(
 
 // контейнер попап редактирования профиля
 const popupEditProfile = document.querySelector('.popup__edit-profile');
-// экземпляр класса Popup
+// экземпляр класса Popup для профиля
 const editPopup = new Popup(
   popupEditProfile,
   'edit-profile__button',
   popupEditProfile
+);
+
+// контейнер попап картинки 
+const popupTypeImage = document.querySelector('.popup_type_image');
+// экземпляр класса Popup для картинки
+const imagePopup = new Popup(
+  popupTypeImage,
+  'place-card__image',
+  popupTypeImage
 );
 
 
@@ -45,34 +54,3 @@ popupForm.addEventListener('submit', (event) => {
     //закрытие попапа после сабмита
   placePopup.close(event);
 });
-
-
-/* методы работы с попап */
-
-
-// открытие попапа place
-document.querySelector('.user-info__button')
-.addEventListener('click', (event) => {
-  placePopup.open(event);
-})
-
-// открытие попапа edit
-document.querySelector('.edit-profile__button')
-.addEventListener('click', (event) => {
-  editPopup.open(event);
-})
-
-// закрытие попап place/edit
-document.querySelectorAll('.popup__close')
-.forEach(item => {
-    item.addEventListener('click', (event) => {
-      placePopup.close(event);
-      editPopup.close(event);
-    })
-})
-
-// закрытие попап place/edit клавишей Escape
-document.addEventListener('keydown', (event) => {
-  placePopup.closeFormEsc(event);
-  editPopup.closeFormEsc(event);
-})

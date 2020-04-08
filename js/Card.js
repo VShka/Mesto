@@ -33,7 +33,11 @@ create(name, link) {
     cardContainer.querySelector('.place-card__delete-icon').addEventListener('click', () => {
         this.remove(event);
     });
+    cardContainer.querySelector('.place-card__image').addEventListener('click', () => {
+        imagePopup.open(event);
+    } )
 
+    
     return cardContainer;
 }
 // лайк/дизлайк
