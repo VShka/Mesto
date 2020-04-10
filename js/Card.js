@@ -28,12 +28,14 @@ create(name, link) {
     cardDescription.appendChild(buttonLike);
     
     cardContainer.querySelector('.place-card__like-icon').addEventListener('click', () => {
-        this.like(event);
+        this._like(event);
     });
     cardContainer.querySelector('.place-card__delete-icon').addEventListener('click', () => {
-        this.remove(event);
+        this._remove(event);
     });
-    cardContainer.querySelector('.place-card__image').addEventListener('click', () => {
+
+    // спорный момент (надо не забыть попробовать убрать вызов инородного метода)
+    cardContainer.addEventListener('click', () => {
         imagePopup.open(event);
     } )
 
@@ -41,11 +43,11 @@ create(name, link) {
     return cardContainer;
 }
 // лайк/дизлайк
-    like(event) {
+    _like(event) {
         event.target.classList.toggle('place-card__like-icon_liked');
     }
 // удаление карточки
-    remove(event) {
+    _remove(event) {
         event.target.closest('.place-card').remove();
     }
 }

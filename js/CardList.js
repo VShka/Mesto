@@ -1,7 +1,8 @@
 class CardList {
-    constructor(container, cardTemplate) {
+    constructor(container, cardTemplate, arrCards) {
       this.container = container;
       this._cardTemplate = cardTemplate;
+      this.arrCards = arrCards;
     }
 
      // добавляет карточку
@@ -13,8 +14,8 @@ class CardList {
     }
 
      // отрисовывает карточки из массива при загрузке страницы
-    render(arrCards) {
-      arrCards.forEach(item => {
+    render() {
+      this.arrCards.forEach(item => {
         this._addCard(item.name, item.link);
       })
     }
@@ -25,7 +26,7 @@ class CardList {
       const name = formName.value;
       const link = formLink.value;
       
-      cardList._addCard(name, link);
+      this._addCard(name, link);
       // валидация кнопки
       btnAddPlace.setAttribute('disabled', true);
       btnAddPlace.classList.add('popup__button_disabled');
