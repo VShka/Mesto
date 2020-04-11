@@ -1,6 +1,5 @@
 class FormAction {
-    constructor(form) {
-        this._form = form;
+    constructor() {
     }
 
     // сброс поведения формы по умолчанию
@@ -9,7 +8,7 @@ class FormAction {
     } 
   
     // сброс полей формы
-    resetFormFields() {
-    this._form.reset();
+    resetFormFields(form) {
+    form.reset();
     }
 }

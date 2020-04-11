@@ -10,7 +10,7 @@ const cardList = new CardList(placesList, card, initialCards);
 cardList.render();
 
 // экземпляр класса действия с формой
-const formAction = new FormAction(popupForm);
+const formAction = new FormAction();
 
 // контейнер попап добавления карточки
 const popupTypePlace = document.querySelector('.popup_type_place');
@@ -81,7 +81,7 @@ popupForm.addEventListener('submit', (event) => {
     //сброс дефолтного поведения формы
   formAction.preventDefault(event);
     //сброс полей формы после сабмита
-  formAction.resetFormFields();
+  formAction.resetFormFields(popupForm);
     //закрытие попапа после сабмита
   placePopup.close(event);
 });

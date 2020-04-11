@@ -3,6 +3,11 @@ class UserInfo {
         this.editForm = editForm;
         this.userName = userName;
         this.userJob = userJob;
+
+        this.name = this.editForm.elements.name;
+        this.job = this.editForm.elements.job;
+
+        this.defaultFormValue();
     }
     // обновляет данные о пользователе
     _setUserInfo(newNameInfo, newJobInfo) {
@@ -12,9 +17,11 @@ class UserInfo {
     }
     // отображает данные на странице
     updateUserInfo() {
-        // поля формы edit
-        const [name, job] = this.editForm.elements;
         // используем приватный метод и подставляем значение полей формы edit
-        this._setUserInfo(name.value, job.value);
+        this._setUserInfo(this.name.value, this.job.value);
+    }
+    // подставляет в форму текущие значения полей
+    defaultFormValue() {
+        this.job.value = this.userJob.textContent;
     }
 }
