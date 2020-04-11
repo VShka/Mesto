@@ -22,6 +22,7 @@ class UserInfo {
     }
     // подставляет в форму текущие значения полей
     defaultFormValue() {
+        this.name.value = this.userName.textContent;
         this.job.value = this.userJob.textContent;
     }
 }
