@@ -37,7 +37,7 @@ create(name, link) {
     // спорный момент (надо не забыть попробовать убрать вызов инородного метода)
     cardContainer.addEventListener('click', () => {
         imagePopup.open(event);
-    } )
+    });
 
     
     return cardContainer;

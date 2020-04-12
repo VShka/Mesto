@@ -20,7 +20,6 @@ const btnOpenPlace = document.querySelector('.user-info__button');
 const placePopup = new Popup(
   popupTypePlace,
   'user-info__button',
-  popupTypePlace,
   btnOpenPlace
 );
 
@@ -32,7 +31,6 @@ const btnOpenEdit = document.querySelector('.edit-profile__button');
 const editPopup = new Popup(
   popupEditProfile,
   'edit-profile__button',
-  popupEditProfile,
   btnOpenEdit
 );
 
@@ -44,7 +42,6 @@ const btnOpenImage = document.querySelector('.place-card__image');
 const imagePopup = new Popup(
   popupTypeImage,
   'place-card__image',
-  popupTypeImage,
   btnOpenImage
 );
 
@@ -53,25 +50,33 @@ const popupEditForm = document.forms.edit;
 // поля персональной информации
 const userInfoName = document.querySelector('.user-info__name');
 const userInfoJob = document.querySelector('.user-info__job');
-
+// экземпляр класса для перс данных
 const userInfo = new UserInfo(
   popupEditForm,
   userInfoName,
   userInfoJob
 );
 
+
 const popupForm = document.forms.new;
+// экземпляры класса для валидации форм
 const placeFormValidator = new FormValidator(popupForm);
 const editFormValidator = new FormValidator(popupEditForm);
 
 /* методы работы с формой персональных данных */
+
+// редактируем персональные данные
 popupEditForm.addEventListener('submit', event => {
-  //сброс дефолтного поведения формы
+    //сброс дефолтного поведения формы
   formAction.preventDefault(event);
-  // обновление персональных данных на странице
+    // обновление персональных данных на странице
   userInfo.updateUserInfo();
-  // закытие формы при сабмите
+    // закытие формы при сабмите
   editPopup.close(event);
+    // сброс полей формы после сабмита
+  formAction.resetFormFields(popupEditForm);
+    // проверка кнопки на валидность
+  editFormValidator.setSubmitButtonState();
 })
 
 
@@ -79,17 +84,14 @@ popupEditForm.addEventListener('submit', event => {
 
 // добавляем 1 карточку
 popupForm.addEventListener('submit', (event) => {
-    //добавление карточки
-  cardList.addCardForm();
     //сброс дефолтного поведения формы
   formAction.preventDefault(event);
-    //сброс полей формы после сабмита
-  formAction.resetFormFields(popupForm);
+    //добавление карточки
+  cardList.addCardForm();
     //закрытие попапа после сабмита
   placePopup.close(event);
-});
-
-// подставляет в форму текущие значения полей
-btnOpenEdit.addEventListener('click', () => {
-  userInfo.defaultFormValue();
+    //сброс полей формы после сабмита
+  formAction.resetFormFields(popupForm);
+    // проверка кнопки на валидность
+  placeFormValidator.setSubmitButtonState();
 });

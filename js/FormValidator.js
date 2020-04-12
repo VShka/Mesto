@@ -3,10 +3,10 @@ class FormValidator {
         this.form = form;
         this.submitBtn = this.form.querySelector('button');
 
-        this.setEventListeners();
+        this._setEventListeners();
     }
     // валидация полей
-    checkInputValidity() {
+    _checkInputValidity() {
         const element = event.target;
         const errorElement = event.target.nextElementSibling;
 
@@ -27,7 +27,7 @@ class FormValidator {
             if (element.validity.typeMismatch) {
                 errorElement.textContent = 'Здесь должна быть ссылка';
                 errorElement.classList.add('error-message_active');
-                
+
                 return false;
             }
         }
@@ -47,9 +47,9 @@ class FormValidator {
         }
     }
     // добавляет обработчики
-    setEventListeners() {
+    _setEventListeners() {
         this.form.addEventListener('input', () => {
-            this.checkInputValidity();
+            this._checkInputValidity();
             this.setSubmitButtonState();
         })
     }
