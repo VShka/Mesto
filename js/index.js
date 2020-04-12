@@ -60,6 +60,9 @@ const userInfo = new UserInfo(
   userInfoJob
 );
 
+const popupForm = document.forms.new;
+const placeFormValidator = new FormValidator(popupForm);
+const editFormValidator = new FormValidator(popupEditForm);
 
 /* методы работы с формой персональных данных */
 popupEditForm.addEventListener('submit', event => {
@@ -86,4 +89,7 @@ popupForm.addEventListener('submit', (event) => {
   placePopup.close(event);
 });
 
-// методы работы с персональными данными
+// подставляет в форму текущие значения полей
+btnOpenEdit.addEventListener('click', () => {
+  userInfo.defaultFormValue();
+});

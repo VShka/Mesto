@@ -6,8 +6,6 @@ class UserInfo {
 
         this.name = this.editForm.elements.name;
         this.job = this.editForm.elements.job;
-
-        this.defaultFormValue();
     }
     // обновляет данные о пользователе
     _setUserInfo(newNameInfo, newJobInfo) {

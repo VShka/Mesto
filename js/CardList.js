@@ -22,13 +22,12 @@ class CardList {
 
     // добавление 1 карточки из формы
     addCardForm() {
+      const popupForm = document.forms.new;
+      const [formName, formLink] = popupForm.elements;
       // получаем значение полей формы
       const name = formName.value;
       const link = formLink.value;
       
       this._addCard(name, link);
-      // валидация кнопки
-      btnAddPlace.setAttribute('disabled', true);
-      btnAddPlace.classList.add('popup__button_disabled');
     }
 }

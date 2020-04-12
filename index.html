@@ -31,9 +31,9 @@
         <img src="./images/close.svg" alt="Закрыть окно добавления фотографий" class="popup__close">
         <h3 class="popup__title">Новое место</h3>
         <form class="popup__form popup__form_place" name="new" novalidate>
-            <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Название" required>
+            <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Название" required minlength="2" maxlength="30">
             <span id="error-name" class="error-message"></span>
-            <input type="url" name="link" class="popup__input popup__input_type_link-url" placeholder="Ссылка на картинку" required>
+            <input type="url" name="link" class="popup__input popup__input_type_link-url" placeholder="Ссылка на картинку" required minlength="2">
             <span id="error-link" class="error-message"></span>
             <button class="popup__button popup__button_disabled btn__add-place" disabled>+</button>
         </form>
@@ -60,14 +60,12 @@
     </div>
   </div>
   <script src="js/initialCards.js"></script>
-  <script src="js/script.js"></script>
-  <script src="js/script__7project.js"></script>
-  <!-- <script src="js/validation.js"></script> -->
   <script src="js/Card.js"></script>
   <script src="js/CardList.js"></script>
   <script src="js/Popup.js"></script>
   <script src="js/UserInfo.js"></script>
   <script src="js/FormAction.js"></script>
+  <script src="js/FormValidator.js"></script>
   <script src="js/index.js"></script>
 </body>
 </html>
