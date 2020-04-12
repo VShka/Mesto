@@ -3,7 +3,7 @@ const card = new Card();
 
 // контейнер для CardList
 const placesList = document.querySelector('.places-list');
-// экземпляр контейнера 
+// экземпляр контейнера
 const cardList = new CardList(placesList, card, initialCards);
 
 // передаем методу массив карточек и отрисовываем при загрузке в нашем контейнере
@@ -34,7 +34,7 @@ const editPopup = new Popup(
   btnOpenEdit
 );
 
-// контейнер попап картинки 
+// контейнер попап картинки
 const popupTypeImage = document.querySelector('.popup_type_image');
 // "кнопка" открытия попапа картинки - кнопкой является сама картинка
 const btnOpenImage = document.querySelector('.place-card__image');
@@ -65,17 +65,20 @@ const editFormValidator = new FormValidator(popupEditForm);
 
 /* методы работы с формой персональных данных */
 
+// Можно лучше
+// Код обработчиков вынести в отдельные методы
+
 // редактируем персональные данные
 popupEditForm.addEventListener('submit', event => {
-    //сброс дефолтного поведения формы
+  //сброс дефолтного поведения формы
   formAction.preventDefault(event);
-    // обновление персональных данных на странице
+  // обновление персональных данных на странице
   userInfo.updateUserInfo();
-    // закытие формы при сабмите
+  // закытие формы при сабмите
   editPopup.close(event);
-    // сброс полей формы после сабмита
+  // сброс полей формы после сабмита
   formAction.resetFormFields(popupEditForm);
-    // проверка кнопки на валидность
+  // проверка кнопки на валидность
   editFormValidator.setSubmitButtonState();
 })
 
@@ -84,14 +87,23 @@ popupEditForm.addEventListener('submit', event => {
 
 // добавляем 1 карточку
 popupForm.addEventListener('submit', (event) => {
-    //сброс дефолтного поведения формы
+  //сброс дефолтного поведения формы
   formAction.preventDefault(event);
-    //добавление карточки
+  //добавление карточки
   cardList.addCardForm();
-    //закрытие попапа после сабмита
+  //закрытие попапа после сабмита
   placePopup.close(event);
-    //сброс полей формы после сабмита
+  //сброс полей формы после сабмита
   formAction.resetFormFields(popupForm);
-    // проверка кнопки на валидность
+  // проверка кнопки на валидность
   placeFormValidator.setSubmitButtonState();
 });
+
+// Здравствйте!
+// Хорошо с разбиением справились, но есть еще недочеты
+// 1. См.комментарии в коде
+// 2. При открытии попап с данными юзера не подставляется актуальная информация
+// 3. Если открыть попап с данными юзера, вызвать ошибку на инпуте, закрыть по крестику, открыть снова
+// ошибка будет гореть, а в инпутах будет невалидная информация
+
+// Исправьте критические замечания и присылайте на проверку.
