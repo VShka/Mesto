@@ -48,11 +48,11 @@ class Popup {
   }
 
   _setEventListeners(btn) {
-    if (btn == this.btnOpen) {
-      this.btnOpen.addEventListener('click', event => {
-        this.open(event);
-      });
-    }
+     
+    this.btnOpen.addEventListener('click', event => {
+      this.open(event);
+    });
+  
     if (btn == this.btnClose) {
       this.btnClose.forEach(item => {
         item.addEventListener('click', event => {

@@ -59,6 +59,7 @@ const userInfo = new UserInfo(
 
 
 const popupForm = document.forms.new;
+const [formName, formLink] = popupForm.elements;
 // экземпляры класса для валидации форм
 const placeFormValidator = new FormValidator(popupForm);
 const editFormValidator = new FormValidator(popupEditForm);
@@ -90,7 +91,7 @@ popupForm.addEventListener('submit', (event) => {
   //сброс дефолтного поведения формы
   formAction.preventDefault(event);
   //добавление карточки
-  cardList.addCardForm();
+  cardList._addCard(formName.value, formLink.value);
   //закрытие попапа после сабмита
   placePopup.close(event);
   //сброс полей формы после сабмита

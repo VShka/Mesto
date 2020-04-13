@@ -22,14 +22,4 @@ class CardList {
   // Надо исправить
   // Обработка форм не входит в обязанности этого класса
   // этого кода тут быть не должно
-  // добавление 1 карточки из формы
-  addCardForm() {
-    const popupForm = document.forms.new;
-    const [formName, formLink] = popupForm.elements;
-    // получаем значение полей формы
-    const name = formName.value;
-    const link = formLink.value;
-
-    this._addCard(name, link);
-  }
 }

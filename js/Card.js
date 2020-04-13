@@ -1,7 +1,8 @@
 class Card {
   // Можно лучше
   // Пустой конструктор следует удалить
-  constructor() {
+  constructor(imagePopup) {
+    this.imagePopupMethod = imagePopup;
   }
   // создание карточки
 
@@ -33,25 +34,21 @@ class Card {
     // Установку слушателей выносите в отдельный метод, а тут его вызывайте
     // Через стрелочные функции назначать слушатели нельзя тут -- потом не удалите
     // https://learn.javascript.ru/introduction-browser-events#addeventlistener
-    cardContainer.querySelector('.place-card__like-icon').addEventListener('click', () => {
-      this._like(event);
-    });
-    cardContainer.querySelector('.place-card__delete-icon').addEventListener('click', () => {
-      this._remove(event);
-    });
-
+    
+    this.cardElem = cardContainer;
+    this.setEventListener();
+    // this.cardElem.addEventListener('click', () => {
+    //   this.imagePopupMethod.open(event);
+    // });
     // спорный момент (надо не забыть попробовать убрать вызов инородного метода)
 
     // Это не спорный момент у вас, обращение к глобальному методу, чего делать нельзя
     // ведь если класс перенести в другой проект то придется тянуть за собой все
     // глобальные объекта, которые жестко связаны с ним
     // Все необходимые переменные, методы в класс надо передать как параметр в конструктор
-    cardContainer.addEventListener('click', () => {
-      imagePopup.open(event);
-    });
 
-
-    return cardContainer;
+    
+    return this.cardElem;
   }
   // лайк/дизлайк
   _like(event) {
@@ -63,5 +60,16 @@ class Card {
     // Это пункт чек-листа
     // надо исправить
     event.target.closest('.place-card').remove();
+    this._removeEventListener();
+  }
+
+  setEventListener() {
+    this.cardElem.querySelector('.place-card__like-icon').addEventListener('click', this._like);
+    this.cardElem.querySelector('.place-card__delete-icon').addEventListener('click', this._remove);
+  }
+
+  _removeEventListener() {
+    this.cardElem.querySelector('.place-card__like-icon').removeEventListener('click', this._like);
+    this.cardElem.querySelector('.place-card__delete-icon').removeEventListener('click', this._remove);
   }
 }
