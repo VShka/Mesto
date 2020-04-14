@@ -11,12 +11,6 @@ class Popup {
     // и кнопку открытия и кнопку закрытия и по Esc аучить закрываться?
     // Передайте туда два параметра и прикрутите все слушатели за раз, не вижу препятствий))
     // Надо исправить
-
-    // открытие попапа place/edit/image
-    this._setEventListeners(this.btnOpen);
-    // закрытие попап place/edit/image
-    this._setEventListeners(this.btnClose);
-    // закрытие попап place/edit/image клавишей Escape
     this._setEventListeners();
   }
 
@@ -24,15 +18,6 @@ class Popup {
     if (event.target.classList.contains(this.openFormButton)) {
       this.container.classList.add('popup_is-opened');
     }
-    if (this.openFormButton == 'place-card__image') {
-      // картинка
-      const popupImage = this.container.querySelector('.popup__image');
-      // задаем картинки нужные параметры для отображения
-      popupImage.setAttribute('src', `${event.target.style.backgroundImage.slice(5, -2)}`);
-      popupImage.style.maxWidth = '80vw';
-      popupImage.style.maxHeight = '80vh';
-    }
-
   }
 
   close(event) {
@@ -47,23 +32,21 @@ class Popup {
     }
   }
 
-  _setEventListeners(btn) {
-     
-    this.btnOpen.addEventListener('click', event => {
-      this.open(event);
-    });
-  
-    if (btn == this.btnClose) {
+  _setEventListeners() {
+    if(this.btnOpen != null) {
+      this.btnOpen.addEventListener('click', event => {
+        this.open(event);
+      });
+    }
+    if (this.btnClose != null) {
       this.btnClose.forEach(item => {
         item.addEventListener('click', event => {
           this.close(event);
         })
       });
     }
-    if (btn == undefined) {
-      document.addEventListener('keydown', (event) => {
-        this._closeFormEsc(event);
-      });
-    }
+    document.addEventListener('keydown', (event) => {
+      this._closeFormEsc(event);
+    });
   }
 }

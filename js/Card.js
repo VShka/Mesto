@@ -1,8 +1,9 @@
 class Card {
   // Можно лучше
   // Пустой конструктор следует удалить
-  constructor(imagePopup) {
+  constructor(imagePopup, popupImage) {
     this.imagePopupMethod = imagePopup;
+    this.popupImage = popupImage;
   }
   // создание карточки
 
@@ -37,10 +38,6 @@ class Card {
     
     this.cardElem = cardContainer;
     this.setEventListener();
-    // this.cardElem.addEventListener('click', () => {
-    //   this.imagePopupMethod.open(event);
-    // });
-    // спорный момент (надо не забыть попробовать убрать вызов инородного метода)
 
     // Это не спорный момент у вас, обращение к глобальному методу, чего делать нельзя
     // ведь если класс перенести в другой проект то придется тянуть за собой все
@@ -60,16 +57,27 @@ class Card {
     // Это пункт чек-листа
     // надо исправить
     event.target.closest('.place-card').remove();
-    this._removeEventListener();
+    // this._removeEventListener();
   }
 
   setEventListener() {
     this.cardElem.querySelector('.place-card__like-icon').addEventListener('click', this._like);
     this.cardElem.querySelector('.place-card__delete-icon').addEventListener('click', this._remove);
+    this.cardElem.addEventListener('click', () => {
+      this._openImage();
+    });
   }
 
   _removeEventListener() {
     this.cardElem.querySelector('.place-card__like-icon').removeEventListener('click', this._like);
     this.cardElem.querySelector('.place-card__delete-icon').removeEventListener('click', this._remove);
+  }
+
+  _openImage() {
+    this.imagePopupMethod.open(event);
+
+    this.popupImage.setAttribute('src', `${event.target.style.backgroundImage.slice(5, -2)}`);
+    this.popupImage.style.maxWidth = '80vw';
+    this.popupImage.style.maxHeight = '80vh';
   }
 }

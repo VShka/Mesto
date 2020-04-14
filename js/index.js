@@ -1,5 +1,17 @@
+// контейнер попап картинки
+const popupTypeImage = document.querySelector('.popup_type_image');
+// "кнопка" открытия попапа картинки - кнопкой является сама картинка
+const btnOpenImage = document.querySelector('.place-card__image');
+// экземпляр класса Popup для картинки
+const imagePopup = new Popup(
+  popupTypeImage,
+  'place-card__image',
+  btnOpenImage
+);
+
+const popupImage = document.querySelector('.popup__image');
 // экземпляр карточки
-const card = new Card();
+const card = new Card(imagePopup, popupImage);
 
 // контейнер для CardList
 const placesList = document.querySelector('.places-list');
@@ -34,16 +46,7 @@ const editPopup = new Popup(
   btnOpenEdit
 );
 
-// контейнер попап картинки
-const popupTypeImage = document.querySelector('.popup_type_image');
-// "кнопка" открытия попапа картинки - кнопкой является сама картинка
-const btnOpenImage = document.querySelector('.place-card__image');
-// экземпляр класса Popup для картинки
-const imagePopup = new Popup(
-  popupTypeImage,
-  'place-card__image',
-  btnOpenImage
-);
+
 
 // форма редактирования персональных данных
 const popupEditForm = document.forms.edit;
