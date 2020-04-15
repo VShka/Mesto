@@ -4,6 +4,11 @@ class Card {
   constructor(imagePopup, popupImage) {
     this.imagePopupMethod = imagePopup;
     this.popupImage = popupImage;
+
+    
+    this.like = this._like.bind(this);
+    this.remove = this._remove.bind(this);
+    this.openImage = this._openImage.bind(this);
   }
   // создание карточки
 
@@ -57,20 +62,20 @@ class Card {
     // Это пункт чек-листа
     // надо исправить
     event.target.closest('.place-card').remove();
-    // this._removeEventListener();
+
+    this._removeEventListener;
   }
 
   setEventListener() {
-    this.cardElem.querySelector('.place-card__like-icon').addEventListener('click', this._like);
-    this.cardElem.querySelector('.place-card__delete-icon').addEventListener('click', this._remove);
-    this.cardElem.addEventListener('click', () => {
-      this._openImage();
-    });
+    this.cardElem.querySelector('.place-card__like-icon').addEventListener('click', this.like);
+    this.cardElem.querySelector('.place-card__delete-icon').addEventListener('click', this.remove);
+    this.cardElem.addEventListener('click', this.openImage);
   }
 
   _removeEventListener() {
-    this.cardElem.querySelector('.place-card__like-icon').removeEventListener('click', this._like);
-    this.cardElem.querySelector('.place-card__delete-icon').removeEventListener('click', this._remove);
+    this.cardElem.querySelector('.place-card__like-icon').removeEventListener('click', this.like);
+    this.cardElem.querySelector('.place-card__delete-icon').removeEventListener('click', this.remove);
+    this.cardElem.removeEventListener('click', this.openImage);
   }
 
   _openImage() {
