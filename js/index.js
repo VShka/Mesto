@@ -78,37 +78,19 @@ const editPopup = new Popup(
 // Можно лучше
 // Код обработчиков вынести в отдельные методы
 
-// редактируем персональные данные
-popupEditForm.addEventListener('submit', event => {
-  //сброс дефолтного поведения формы
-  formAction.preventDefault(event);
-  // обновление персональных данных на странице
-  userInfo.updateUserInfo();
-  // закытие формы при сабмите
-  editPopup.close(event);
-  // сброс полей формы после сабмита
-  // formAction.resetFormFields(popupEditForm);
-  // проверка кнопки на валидность
-  editFormValidator.setSubmitButtonState();
-})
+// я ведь правильно вас понял, создав класс Listeners и сделал там метод для навешивания обработчиков?
 
-
-/* методы работы с карточками */
-
-// добавляем 1 карточку
-popupForm.addEventListener('submit', (event) => {
-  //сброс дефолтного поведения формы
-  formAction.preventDefault(event);
-  //добавление карточки
-  cardList._addCard(formName.value, formLink.value);
-  //закрытие попапа после сабмита
-  placePopup.close(event);
-  //сброс полей формы после сабмита
-  formAction.resetFormFields(popupForm);
-  // проверка кнопки на валидность
-  placeFormValidator.setSubmitButtonState();
-});
-
+const listeners = new Listeners(
+  popupForm,
+  popupEditForm,
+  formAction,
+  cardList,
+  placePopup,
+  editPopup,
+  userInfo,
+  placeFormValidator,
+  editFormValidator
+);
 
 // Здравствйте!
 // Хорошо с разбиением справились, но есть еще недочеты
