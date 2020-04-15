@@ -1,9 +1,13 @@
 class Popup {
-  constructor(container, openFormButton, btnOpen) {
+  constructor(container, openFormButton, btnOpen, userInfoMethod, validatorMethod) {
     this.container = container;
     this.openFormButton = openFormButton;
     this.btnOpen = btnOpen;
     this.btnClose = this.container.querySelectorAll('.popup__close');
+
+    // методы для editPopup
+    this.userInfoMethod = userInfoMethod;
+    this.validatorMethod = validatorMethod;
 
 
     // Можно лучше
@@ -17,6 +21,15 @@ class Popup {
   open(event) {
     if (event.target.classList.contains(this.openFormButton)) {
       this.container.classList.add('popup_is-opened');
+      // подставляет текущую информацию в форму профиля
+      if (this.userInfoMethod) {
+        this.userInfoMethod.defaultFormValue();
+      }
+      // проверяет на валидность кнопку и сбрасывает ошибки, при открытии окна, если закрыли с невалидным инпутом
+      if (this.validatorMethod) {
+        this.validatorMethod.resetError();
+        this.validatorMethod.setSubmitButtonState();
+      }
     }
   }
 
@@ -33,12 +46,12 @@ class Popup {
   }
 
   _setEventListeners() {
-    if(this.btnOpen != null) {
+    if(this.btnOpen) {
       this.btnOpen.addEventListener('click', event => {
         this.open(event);
       });
     }
-    if (this.btnClose != null) {
+    if (this.btnClose) {
       this.btnClose.forEach(item => {
         item.addEventListener('click', event => {
           this.close(event);

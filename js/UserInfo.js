@@ -1,12 +1,12 @@
 class UserInfo {
-  constructor(editForm, userName, userJob) {
-    this.editForm = editForm;
+  constructor(userName, userJob, nameInput, jobInput) {
+    
     this.userName = userName;
     this.userJob = userJob;
     // Передайте в класс уже конечные элементы
     // editForm.elements.name, editForm.elements.job так будет проще
-    this.name = this.editForm.elements.name;
-    this.job = this.editForm.elements.job;
+    this.nameInput = nameInput;
+    this.jobInput = jobInput;
   }
 
   // обновляет данные о пользователе
@@ -19,12 +19,12 @@ class UserInfo {
   // отображает данные на странице
   updateUserInfo() {
     // используем приватный метод и подставляем значение полей формы edit
-    this._setUserInfo(this.name.value, this.job.value);
+    this._setUserInfo(this.nameInput.value, this.jobInput.value);
   }
 
   // подставляет в форму текущие значения полей
   defaultFormValue() {
-    this.name.value = this.userName.textContent;
-    this.job.value = this.userJob.textContent;
+    this.nameInput.value = this.userName.textContent;
+    this.jobInput.value = this.userJob.textContent;
   }
 }

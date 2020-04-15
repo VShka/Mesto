@@ -2,7 +2,7 @@ class FormValidator {
   constructor(form) {
     this.form = form;
     this.submitBtn = this.form.querySelector('button');
-
+    this.error = this.form.querySelectorAll('.error-message');
     this._setEventListeners();
   }
 
@@ -55,5 +55,9 @@ class FormValidator {
       this._checkInputValidity();
       this.setSubmitButtonState();
     })
+  }
+
+  resetError() {
+    this.error.forEach(item => item.classList.remove('error-message_active'));
   }
 }

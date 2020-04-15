@@ -35,29 +35,22 @@ const placePopup = new Popup(
   btnOpenPlace
 );
 
-// контейнер попап редактирования профиля
-const popupEditProfile = document.querySelector('.popup__edit-profile');
-// кнопка открытия попапа edit
-const btnOpenEdit = document.querySelector('.edit-profile__button');
-// экземпляр класса Popup для профиля
-const editPopup = new Popup(
-  popupEditProfile,
-  'edit-profile__button',
-  btnOpenEdit
-);
+
 
 
 
 // форма редактирования персональных данных
 const popupEditForm = document.forms.edit;
+const [nameInput, jobInput] = popupEditForm.elements;
 // поля персональной информации
 const userInfoName = document.querySelector('.user-info__name');
 const userInfoJob = document.querySelector('.user-info__job');
 // экземпляр класса для перс данных
 const userInfo = new UserInfo(
-  popupEditForm,
   userInfoName,
-  userInfoJob
+  userInfoJob,
+  nameInput,
+  jobInput
 );
 
 
@@ -66,6 +59,19 @@ const [formName, formLink] = popupForm.elements;
 // экземпляры класса для валидации форм
 const placeFormValidator = new FormValidator(popupForm);
 const editFormValidator = new FormValidator(popupEditForm);
+
+// контейнер попап редактирования профиля
+const popupEditProfile = document.querySelector('.popup__edit-profile');
+// кнопка открытия попапа edit
+const btnOpenEdit = document.querySelector('.edit-profile__button');
+// экземпляр класса Popup для профиля
+const editPopup = new Popup(
+  popupEditProfile,
+  'edit-profile__button',
+  btnOpenEdit,
+  userInfo,
+  editFormValidator
+);
 
 /* методы работы с формой персональных данных */
 
@@ -81,7 +87,7 @@ popupEditForm.addEventListener('submit', event => {
   // закытие формы при сабмите
   editPopup.close(event);
   // сброс полей формы после сабмита
-  formAction.resetFormFields(popupEditForm);
+  // formAction.resetFormFields(popupEditForm);
   // проверка кнопки на валидность
   editFormValidator.setSubmitButtonState();
 })
@@ -102,6 +108,7 @@ popupForm.addEventListener('submit', (event) => {
   // проверка кнопки на валидность
   placeFormValidator.setSubmitButtonState();
 });
+
 
 // Здравствйте!
 // Хорошо с разбиением справились, но есть еще недочеты

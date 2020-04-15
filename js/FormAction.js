@@ -1,6 +1,4 @@
 class FormAction {
-    constructor() {
-    }
 
     // сброс поведения формы по умолчанию
     preventDefault(event) {
