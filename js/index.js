@@ -55,10 +55,12 @@ const userInfo = new UserInfo(
 
 
 const popupForm = document.forms.new;
+
 const [formName, formLink] = popupForm.elements;
+ 
 // экземпляры класса для валидации форм
-const placeFormValidator = new FormValidator(popupForm);
-const editFormValidator = new FormValidator(popupEditForm);
+const placeFormValidator = new FormValidator(popupForm, errors);
+const editFormValidator = new FormValidator(popupEditForm, errors);
 
 // контейнер попап редактирования профиля
 const popupEditProfile = document.querySelector('.popup__edit-profile');
@@ -80,23 +82,49 @@ const editPopup = new Popup(
 
 // я ведь правильно вас понял, создав класс Listeners и сделал там метод для навешивания обработчиков?
 
-const listeners = new Listeners(
-  popupForm,
-  popupEditForm,
-  formAction,
-  cardList,
-  placePopup,
-  editPopup,
-  userInfo,
-  placeFormValidator,
-  editFormValidator
-);
+// >> Не совсем
+// В принципе вынести код который запускает что нужно запустить и ставит слушатели на что нужно ставить --
+// нормальная идея, но класс для этого не нужен, это можно в методе сгруппировать
+// А имел ввиду я это (например):
+// Было:
 
-// Здравствйте!
-// Хорошо с разбиением справились, но есть еще недочеты
-// 1. См.комментарии в коде
-// 2. При открытии попап с данными юзера не подставляется актуальная информация
-// 3. Если открыть попап с данными юзера, вызвать ошибку на инпуте, закрыть по крестику, открыть снова
-// ошибка будет гореть, а в инпутах будет невалидная информация
+// this.editForm.addEventListener('submit', event => {
+//   this.formAction.preventDefault(event);
+//   this.userInfo.updateUserInfo();
+//   this.editPopup.close(event);
+//   this.editFormValidator.setSubmitButtonState();
+// })
 
-// Исправьте критические замечания и присылайте на проверку.
+// Стало бы:
+
+// function submitEditForm(event) {
+//   this.formAction.preventDefault(event);
+//   this.userInfo.updateUserInfo();
+//   this.editPopup.close(event);
+//   this.editFormValidator.setSubmitButtonState();
+// }
+
+// this.editForm.addEventListener('submit', (event) => submitEditForm(event));
+
+// инициализация форм
+
+const initializationPlaceForm = function (event) {
+  formAction.preventDefault(event);
+  cardList.addCard(formName.value, formLink.value);
+  placePopup.close(event);
+  formAction.resetFormFields(popupForm);
+  placeFormValidator.setSubmitButtonState();
+}
+popupForm.addEventListener('submit', event => initializationPlaceForm(event));
+
+const initializationEditForm = function (event) {
+  formAction.preventDefault(event);
+  userInfo.updateUserInfo();
+  editPopup.close(event);
+  editFormValidator.setSubmitButtonState();
+}
+popupEditForm.addEventListener('submit', event => initializationEditForm(event));
+
+
+// В принципе все хорошо, просмотрите везде комментарии, исправьте то малое из критических замечаний,
+// что осталось и я приму с удовольствием. Прошу прощения за задержку.

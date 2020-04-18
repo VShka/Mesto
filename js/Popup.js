@@ -9,12 +9,6 @@ class Popup {
     this.userInfoMethod = userInfoMethod;
     this.validatorMethod = validatorMethod;
 
-
-    // Можно лучше
-    // Зачем 3 раза вызывать метод, когда можно сделать 1 вызов передав туда
-    // и кнопку открытия и кнопку закрытия и по Esc аучить закрываться?
-    // Передайте туда два параметра и прикрутите все слушатели за раз, не вижу препятствий))
-    // Надо исправить
     this._setEventListeners();
   }
 
@@ -46,7 +40,7 @@ class Popup {
   }
 
   _setEventListeners() {
-    if(this.btnOpen) {
+    if (this.btnOpen) {
       this.btnOpen.addEventListener('click', event => {
         this.open(event);
       });

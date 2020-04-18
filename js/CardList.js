@@ -6,7 +6,7 @@ class CardList {
   }
 
   // добавляет карточку
-  _addCard(name, link) {
+  addCard(name, link) {
     // используем метод create экземпляра сard
     const template = this._cardTemplate.create(name, link);
 
@@ -16,10 +16,7 @@ class CardList {
   // отрисовывает карточки из массива при загрузке страницы
   render() {
     this.arrCards.forEach(item => {
-      this._addCard(item.name, item.link);
+      this.addCard(item.name, item.link);
     })
   }
-  // Надо исправить
-  // Обработка форм не входит в обязанности этого класса
-  // этого кода тут быть не должно
 }

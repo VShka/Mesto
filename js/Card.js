@@ -5,7 +5,7 @@ class Card {
     this.imagePopupMethod = imagePopup;
     this.popupImage = popupImage;
 
-    
+
     this.like = this._like.bind(this);
     this.remove = this._remove.bind(this);
     this.openImage = this._openImage.bind(this);
@@ -13,6 +13,7 @@ class Card {
   // создание карточки
 
   create(name, link) {
+    this.link = link;
     const cardContainer = document.createElement('div');
     const cardImage = document.createElement('div');
     const buttonDelete = document.createElement('button');
@@ -27,7 +28,7 @@ class Card {
     cardName.classList.add('place-card__name');
     buttonLike.classList.add('place-card__like-icon');
 
-    cardImage.setAttribute('style', `background-image: url(${link})`);
+    cardImage.setAttribute('style', `background-image: url(${this.link})`);
     cardName.textContent = name;
 
     cardContainer.appendChild(cardImage);
@@ -36,34 +37,23 @@ class Card {
     cardDescription.appendChild(cardName);
     cardDescription.appendChild(buttonLike);
 
-    // Надо исправить
-    // Установку слушателей выносите в отдельный метод, а тут его вызывайте
-    // Через стрелочные функции назначать слушатели нельзя тут -- потом не удалите
-    // https://learn.javascript.ru/introduction-browser-events#addeventlistener
-    
     this.cardElem = cardContainer;
     this.setEventListener();
 
-    // Это не спорный момент у вас, обращение к глобальному методу, чего делать нельзя
-    // ведь если класс перенести в другой проект то придется тянуть за собой все
-    // глобальные объекта, которые жестко связаны с ним
-    // Все необходимые переменные, методы в класс надо передать как параметр в конструктор
-
-    
     return this.cardElem;
   }
+
   // лайк/дизлайк
   _like(event) {
     event.target.classList.toggle('place-card__like-icon_liked');
   }
+
   // удаление карточки
   _remove(event) {
-    // Слушатели надо удалять
-    // Это пункт чек-листа
-    // надо исправить
+
     event.target.closest('.place-card').remove();
 
-    this._removeEventListener;
+    this._removeEventListener();
   }
 
   setEventListener() {
@@ -80,9 +70,11 @@ class Card {
 
   _openImage() {
     this.imagePopupMethod.open(event);
-
-    this.popupImage.setAttribute('src', `${event.target.style.backgroundImage.slice(5, -2)}`);
-    this.popupImage.style.maxWidth = '80vw';
-    this.popupImage.style.maxHeight = '80vh';
+    // Можно лучше
+    // чтобы не парсить URL сохраните его внутри класса при создании карточки, а тут просто подставьте
+    
+    this.popupImage.setAttribute('src', `${this.link}`);
+    // Можно и нужно лучше
+    // Уберите это в CSS, JS олжен оперировать классами
   }
 }

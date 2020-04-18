@@ -1,10 +1,8 @@
 class UserInfo {
   constructor(userName, userJob, nameInput, jobInput) {
-    
+
     this.userName = userName;
     this.userJob = userJob;
-    // Передайте в класс уже конечные элементы
-    // editForm.elements.name, editForm.elements.job так будет проще
     this.nameInput = nameInput;
     this.jobInput = jobInput;
   }
