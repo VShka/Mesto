@@ -1,8 +1,8 @@
 class UserInfo {
-  constructor(userName, userJob, nameInput, jobInput) {
+  constructor({userInfoName, userInfoJob, nameInput, jobInput}) {
 
-    this.userName = userName;
-    this.userJob = userJob;
+    this.userName = userInfoName;
+    this.userJob = userInfoJob;
     this.nameInput = nameInput;
     this.jobInput = jobInput;
   }

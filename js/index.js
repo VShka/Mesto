@@ -11,7 +11,7 @@ const imagePopup = new Popup(
 
 const popupImage = document.querySelector('.popup__image');
 // экземпляр карточки
-const card = new Card(imagePopup, popupImage);
+const card = new Card(imagePopup.open.bind(imagePopup), popupImage);
 
 // контейнер для CardList
 const placesList = document.querySelector('.places-list');
@@ -35,10 +35,6 @@ const placePopup = new Popup(
   btnOpenPlace
 );
 
-
-
-
-
 // форма редактирования персональных данных
 const popupEditForm = document.forms.edit;
 const [nameInput, jobInput] = popupEditForm.elements;
@@ -46,18 +42,23 @@ const [nameInput, jobInput] = popupEditForm.elements;
 const userInfoName = document.querySelector('.user-info__name');
 const userInfoJob = document.querySelector('.user-info__job');
 // экземпляр класса для перс данных
-const userInfo = new UserInfo(
+const userInfo = new UserInfo({
   userInfoName,
   userInfoJob,
   nameInput,
   jobInput
-);
-
+});
 
 const popupForm = document.forms.new;
 
 const [formName, formLink] = popupForm.elements;
- 
+// объект ошибок ru
+const errors = {
+  valueMissing: 'Это обязательное поле',
+  tooShort: 'Должно быть от 2 до 30 символов',
+  typeMismatch: 'Здесь должна быть ссылка'
+};
+
 // экземпляры класса для валидации форм
 const placeFormValidator = new FormValidator(popupForm, errors);
 const editFormValidator = new FormValidator(popupEditForm, errors);
@@ -75,40 +76,9 @@ const editPopup = new Popup(
   editFormValidator
 );
 
-/* методы работы с формой персональных данных */
-
-// Можно лучше
-// Код обработчиков вынести в отдельные методы
-
-// я ведь правильно вас понял, создав класс Listeners и сделал там метод для навешивания обработчиков?
-
-// >> Не совсем
-// В принципе вынести код который запускает что нужно запустить и ставит слушатели на что нужно ставить --
-// нормальная идея, но класс для этого не нужен, это можно в методе сгруппировать
-// А имел ввиду я это (например):
-// Было:
-
-// this.editForm.addEventListener('submit', event => {
-//   this.formAction.preventDefault(event);
-//   this.userInfo.updateUserInfo();
-//   this.editPopup.close(event);
-//   this.editFormValidator.setSubmitButtonState();
-// })
-
-// Стало бы:
-
-// function submitEditForm(event) {
-//   this.formAction.preventDefault(event);
-//   this.userInfo.updateUserInfo();
-//   this.editPopup.close(event);
-//   this.editFormValidator.setSubmitButtonState();
-// }
-
-// this.editForm.addEventListener('submit', (event) => submitEditForm(event));
-
 // инициализация форм
 
-const initializationPlaceForm = function (event) {
+const initializationPlaceForm = (event) => {
   formAction.preventDefault(event);
   cardList.addCard(formName.value, formLink.value);
   placePopup.close(event);
@@ -117,7 +87,7 @@ const initializationPlaceForm = function (event) {
 }
 popupForm.addEventListener('submit', event => initializationPlaceForm(event));
 
-const initializationEditForm = function (event) {
+const initializationEditForm = (event) => {
   formAction.preventDefault(event);
   userInfo.updateUserInfo();
   editPopup.close(event);
@@ -125,6 +95,12 @@ const initializationEditForm = function (event) {
 }
 popupEditForm.addEventListener('submit', event => initializationEditForm(event));
 
-
-// В принципе все хорошо, просмотрите везде комментарии, исправьте то малое из критических замечаний,
-// что осталось и я приму с удовольствием. Прошу прощения за задержку.
+// ## Итог по рефактору кода
+// - Использованы ES6-классы.
+// - В классах напрямую не создаются экземпляры других классов.
+// - Каждый класс выполняет строго одну задачу. Всё, что относится к решению этой задачи, находится
+//   в классе.
+// - Делегирование больше не используется. Обработчики добавлены именно тем элементам, события которых
+//   нужно отслеживать.
+// - Ненужные обработчики удаляются.
+// - Каждый класс описан в отдельном JS-файле.

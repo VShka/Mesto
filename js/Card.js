@@ -1,10 +1,7 @@
 class Card {
-  // Можно лучше
-  // Пустой конструктор следует удалить
-  constructor(imagePopup, popupImage) {
-    this.imagePopupMethod = imagePopup;
+  constructor(openMethod, popupImage) {
+    this.imagePopupMethod = openMethod;
     this.popupImage = popupImage;
-
 
     this.like = this._like.bind(this);
     this.remove = this._remove.bind(this);
@@ -13,7 +10,6 @@ class Card {
   // создание карточки
 
   create(name, link) {
-    this.link = link;
     const cardContainer = document.createElement('div');
     const cardImage = document.createElement('div');
     const buttonDelete = document.createElement('button');
@@ -28,7 +24,7 @@ class Card {
     cardName.classList.add('place-card__name');
     buttonLike.classList.add('place-card__like-icon');
 
-    cardImage.setAttribute('style', `background-image: url(${this.link})`);
+    cardImage.setAttribute('style', `background-image: url(${link})`);
     cardName.textContent = name;
 
     cardContainer.appendChild(cardImage);
@@ -50,10 +46,8 @@ class Card {
 
   // удаление карточки
   _remove(event) {
-
-    event.target.closest('.place-card').remove();
-
     this._removeEventListener();
+    event.target.closest('.place-card').remove();
   }
 
   setEventListener() {
@@ -68,13 +62,10 @@ class Card {
     this.cardElem.removeEventListener('click', this.openImage);
   }
 
-  _openImage() {
-    this.imagePopupMethod.open(event);
+  _openImage(event) {
+    this.imagePopupMethod(event);
     // Можно лучше
-    // чтобы не парсить URL сохраните его внутри класса при создании карточки, а тут просто подставьте
-    
-    this.popupImage.setAttribute('src', `${this.link}`);
-    // Можно и нужно лучше
-    // Уберите это в CSS, JS олжен оперировать классами
+    // чтобы не парсить URL нужно сохранить его при создании карточки, а тут просто передать
+    this.popupImage.setAttribute('src', `${event.target.style.backgroundImage.slice(5, -2)}`);
   }
 }
