@@ -1,23 +1,30 @@
 class UserInfo {
-  constructor({userInfoName, userInfoJob, nameInput, jobInput}) {
-
+  constructor({userInfoName, userInfoJob, nameInput, jobInput, api}) {
     this.userName = userInfoName;
     this.userJob = userInfoJob;
     this.nameInput = nameInput;
     this.jobInput = jobInput;
+    this.api = api;
   }
 
   // обновляет данные о пользователе
-  _setUserInfo(newNameInfo, newJobInfo) {
-    // меняем текст полученных полей персональной информации на новые из формы edit
-    this.userName.textContent = `${newNameInfo}`;
-    this.userJob.textContent = `${newJobInfo}`;
+  _setUserInfo(event) {
+    this.api.updateUserData(event)
+    .then(data => {
+      this.userName.textContent = data.name;
+      this.userJob.textContent = data.about;
+    })
+    .catch(err => console.log(err));
   }
 
   // отображает данные на странице
   updateUserInfo() {
-    // используем приватный метод и подставляем значение полей формы edit
-    this._setUserInfo(this.nameInput.value, this.jobInput.value);
+    this.api.getUserData()
+    .then(data => {
+      this.userName.textContent = data.name;
+      this.userJob.textContent = data.about;
+    })
+    .catch(err => console.log(err));
   }
 
   // подставляет в форму текущие значения полей

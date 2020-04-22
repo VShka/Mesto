@@ -1,8 +1,8 @@
 class CardList {
-  constructor(container, cardTemplate, arrCards) {
+  constructor(container, cardTemplate, api) {
     this.container = container;
     this._cardTemplate = cardTemplate;
-    this.arrCards = arrCards;
+    this.api = api;
   }
 
   // добавляет карточку
@@ -13,10 +13,15 @@ class CardList {
     this.container.insertAdjacentElement('beforeend', template);
   }
 
-  // отрисовывает карточки из массива при загрузке страницы
+  // отрисовывает карточки при загрузке страницы из массива полученных карточек с сервера
   render() {
-    this.arrCards.forEach(item => {
-      this.addCard(item.name, item.link);
+    this.api
+    .getInitialCards()
+    .then(arrCards => {
+      arrCards.forEach(card => {
+        this.addCard(card.name, card.link);
+      })
     })
+    .catch(err => console.log(err));
   }
 }

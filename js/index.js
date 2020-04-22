@@ -26,7 +26,7 @@ const card = new Card(imagePopup.open.bind(imagePopup), popupImage);
 // контейнер для CardList
 const placesList = document.querySelector('.places-list');
 // экземпляр контейнера
-const cardList = new CardList(placesList, card, initialCards);
+const cardList = new CardList(placesList, card, api);
 
 // передаем методу массив карточек и отрисовываем при загрузке в нашем контейнере
 cardList.render();
@@ -56,8 +56,11 @@ const userInfo = new UserInfo({
   userInfoName,
   userInfoJob,
   nameInput,
-  jobInput
+  jobInput,
+  api
 });
+// берем данные о пользоваетеле с сервера при загрузке страницы 
+userInfo.updateUserInfo();
 
 const popupForm = document.forms.new;
 
