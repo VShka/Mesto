@@ -1,3 +1,13 @@
+const api = new Api({
+  baseUrl: 'https://praktikum.tk/cohort10',
+  headers: {
+    authorization: 'b0a1ec88-95e1-4628-ac8e-34d4711900a7',
+    'Content-Type': 'application/json'
+  }
+});
+api.getUserData();
+
+
 // контейнер попап картинки
 const popupTypeImage = document.querySelector('.popup_type_image');
 // "кнопка" открытия попапа картинки - кнопкой является сама картинка
