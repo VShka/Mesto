@@ -7,9 +7,9 @@ class UserInfo {
     this.api = api;
   }
 
-  // обновляет данные о пользователе
-  _setUserInfo(event) {
-    this.api.updateUserData(event)
+  // получаю перс данные с сервака и устанавливаю
+  setUserInfo() {
+    this.api.getUserData()
     .then(data => {
       this.userName.textContent = data.name;
       this.userJob.textContent = data.about;
@@ -17,9 +17,9 @@ class UserInfo {
     .catch(err => console.log(err));
   }
 
-  // отображает данные на странице
+  // обновляет данные о пользователе, отправляю на сервак и сразу же меняет соответствующие поля 
   updateUserInfo() {
-    this.api.getUserData()
+    this.api.updateUserData(this.nameInput.value, this.jobInput.value)
     .then(data => {
       this.userName.textContent = data.name;
       this.userJob.textContent = data.about;

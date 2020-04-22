@@ -5,7 +5,6 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
-api.getUserData();
 
 
 // контейнер попап картинки
@@ -60,7 +59,7 @@ const userInfo = new UserInfo({
   api
 });
 // берем данные о пользоваетеле с сервера при загрузке страницы 
-userInfo.updateUserInfo();
+userInfo.setUserInfo();
 
 const popupForm = document.forms.new;
 

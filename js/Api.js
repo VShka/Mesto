@@ -23,13 +23,13 @@ class Api {
   }
   
   // обновляем данные о пользователе
-  updateUserData(event) {
+  updateUserData(name, job) {
     return fetch(`${this.url}/users/me`, {
         method: 'PATCH',
         headers: this.headers,
         body: JSON.stringify({
-            name: event.currentTarget.elements.name.value,
-            about: event.currentTarget.elements.job.value
+            name: name,
+            about: job
         })
     })
     .then(this.checkRequest)
