@@ -50,15 +50,17 @@ const [nameInput, jobInput] = popupEditForm.elements;
 // поля персональной информации
 const userInfoName = document.querySelector('.user-info__name');
 const userInfoJob = document.querySelector('.user-info__job');
+const userInfoPhoto = document.querySelector('.user-info__photo');
 // экземпляр класса для перс данных
 const userInfo = new UserInfo({
   userInfoName,
   userInfoJob,
+  userInfoPhoto,
   nameInput,
   jobInput,
   api
 });
-// берем данные о пользоваетеле с сервера при загрузке страницы 
+// берем данные о пользоваетеле с сервера при загрузке страницы
 userInfo.setUserInfo();
 
 const popupForm = document.forms.new;
@@ -107,12 +109,4 @@ const initializationEditForm = (event) => {
 }
 popupEditForm.addEventListener('submit', event => initializationEditForm(event));
 
-// ## Итог по рефактору кода
-// - Использованы ES6-классы.
-// - В классах напрямую не создаются экземпляры других классов.
-// - Каждый класс выполняет строго одну задачу. Всё, что относится к решению этой задачи, находится
-//   в классе.
-// - Делегирование больше не используется. Обработчики добавлены именно тем элементам, события которых
-//   нужно отслеживать.
-// - Ненужные обработчики удаляются.
-// - Каждый класс описан в отдельном JS-файле.
+// см. Review.md

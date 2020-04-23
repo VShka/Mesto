@@ -1,7 +1,8 @@
 class UserInfo {
-  constructor({userInfoName, userInfoJob, nameInput, jobInput, api}) {
+  constructor({userInfoName, userInfoJob, userInfoPhoto, nameInput, jobInput, api}) {
     this.userName = userInfoName;
     this.userJob = userInfoJob;
+    this.userInfoPhoto = userInfoPhoto;
     this.nameInput = nameInput;
     this.jobInput = jobInput;
     this.api = api;
@@ -13,6 +14,7 @@ class UserInfo {
     .then(data => {
       this.userName.textContent = data.name;
       this.userJob.textContent = data.about;
+      this.userInfoPhoto.style.backgroundImage = `url(${data.avatar})`;
     })
     .catch(err => console.log(err));
   }
