@@ -22,6 +22,6 @@ class CardList {
         this.addCard(card.name, card.link);
       })
     })
-    .catch(err => console.log(err));
+    .catch(err => console.error('NetworkError:', err.message));
   }
 }

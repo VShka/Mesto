@@ -5,8 +5,6 @@ class FormValidator {
     this.errorMessage = this.form.querySelectorAll('.error-message');
     this.errors = errors;
     this._setEventListeners();
-
-
   }
 
   // валидация полей

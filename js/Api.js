@@ -10,7 +10,7 @@ class Api {
         headers: this.headers
     })
     .then(this.checkRequest)
-    .catch(err => console.log(err));
+    .catch(this.catchErr);
   }
   
   // подгружаем с сервера карточки
@@ -19,7 +19,7 @@ class Api {
         headers: this.headers
     })
     .then(this.checkRequest)
-    .catch(err => console.log(err));
+    .catch(this.catchErr);
   }
   
   // обновляем данные о пользователе
@@ -33,15 +33,19 @@ class Api {
         })
     })
     .then(this.checkRequest)
-    .catch(err => console.log(err));
+    .catch(this.catchErr);
   }
+
+
 
   // проверка состояния запроса
   checkRequest(res) {
-    if (res.ok) {
-        return res.json();
-    } else {
-        return Promise.reject(`Ошибка: ${res.status}`);
-    }
+    if (res.ok) return res.json();
+    return Promise.reject(new Error(res.status));
+  }
+
+  // отлов ошибки
+  catchErr(err) {
+    return Promise.reject(new Error(err.message));
   }
 }

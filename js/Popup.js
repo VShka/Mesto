@@ -1,12 +1,11 @@
 class Popup {
-  constructor(container, openFormButton, btnOpen, userInfoMethod, validatorMethod) {
+  constructor(container, openFormButton, btnOpen, validatorMethod) {
     this.container = container;
     this.openFormButton = openFormButton;
     this.btnOpen = btnOpen;
     this.btnClose = this.container.querySelectorAll('.popup__close');
 
-    // методы для editPopup
-    this.userInfoMethod = userInfoMethod;
+    // метод для editPopup
     this.validatorMethod = validatorMethod;
 
     this._setEventListeners();
@@ -15,10 +14,6 @@ class Popup {
   open(event) {
     if (event.target.classList.contains(this.openFormButton)) {
       this.container.classList.add('popup_is-opened');
-      // подставляет текущую информацию в форму профиля
-      if (this.userInfoMethod) {
-        this.userInfoMethod.defaultFormValue();
-      }
       // проверяет на валидность кнопку и сбрасывает ошибки, при открытии окна, если закрыли с невалидным инпутом
       if (this.validatorMethod) {
         this.validatorMethod.resetError();

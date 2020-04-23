@@ -6,7 +6,6 @@ const api = new Api({
   }
 });
 
-
 // контейнер попап картинки
 const popupTypeImage = document.querySelector('.popup_type_image');
 // "кнопка" открытия попапа картинки - кнопкой является сама картинка
@@ -43,28 +42,11 @@ const placePopup = new Popup(
   'user-info__button',
   btnOpenPlace
 );
-
 // форма редактирования персональных данных
 const popupEditForm = document.forms.edit;
 const [nameInput, jobInput] = popupEditForm.elements;
-// поля персональной информации
-const userInfoName = document.querySelector('.user-info__name');
-const userInfoJob = document.querySelector('.user-info__job');
-const userInfoPhoto = document.querySelector('.user-info__photo');
-// экземпляр класса для перс данных
-const userInfo = new UserInfo({
-  userInfoName,
-  userInfoJob,
-  userInfoPhoto,
-  nameInput,
-  jobInput,
-  api
-});
-// берем данные о пользоваетеле с сервера при загрузке страницы
-userInfo.setUserInfo();
-
+// форма нового места
 const popupForm = document.forms.new;
-
 const [formName, formLink] = popupForm.elements;
 // объект ошибок ru
 const errors = {
@@ -86,9 +68,28 @@ const editPopup = new Popup(
   popupEditProfile,
   'edit-profile__button',
   btnOpenEdit,
-  userInfo,
   editFormValidator
 );
+
+
+// поля персональной информации
+const userInfoName = document.querySelector('.user-info__name');
+const userInfoJob = document.querySelector('.user-info__job');
+const userInfoPhoto = document.querySelector('.user-info__photo');
+// экземпляр класса для перс данных
+const userInfo = new UserInfo({
+  userInfoName,
+  userInfoJob,
+  userInfoPhoto,
+  nameInput,
+  jobInput,
+  api,
+  editPopup
+});
+// берем данные о пользоваетеле с сервера при загрузке страницы
+userInfo.setUserInfo();
+
+
 
 // инициализация форм
 
@@ -103,8 +104,7 @@ popupForm.addEventListener('submit', event => initializationPlaceForm(event));
 
 const initializationEditForm = (event) => {
   formAction.preventDefault(event);
-  userInfo.updateUserInfo();
-  editPopup.close(event);
+  userInfo.updateUserInfo(event);
   editFormValidator.setSubmitButtonState();
 }
 popupEditForm.addEventListener('submit', event => initializationEditForm(event));
