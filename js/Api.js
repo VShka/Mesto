@@ -28,14 +28,26 @@ class Api {
         method: 'PATCH',
         headers: this.headers,
         body: JSON.stringify({
-            name: name,
-            about: job
+          name: name,
+          about: job
         })
     })
     .then(this.checkRequest)
     .catch(this.catchErr);
   }
 
+  addNewCard(name, link) {
+    return fetch(`${this.url}/cards`, {
+      method: 'PATCH',
+      headers: this.headers,
+      body: JSON.stringify({
+        name: name,
+        link: link,
+      })
+    })
+    .then(this.checkRequest)
+    .catch(this.catchErr);
+  }
 
 
   // проверка состояния запроса
