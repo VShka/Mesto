@@ -38,7 +38,7 @@ class Api {
 
   addNewCard(name, link) {
     return fetch(`${this.url}/cards`, {
-      method: 'PATCH',
+      method: 'POST',
       headers: this.headers,
       body: JSON.stringify({
         name: name,
