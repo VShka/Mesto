@@ -1,7 +1,8 @@
 class Card {
-  constructor(openMethod, popupImage) {
+  constructor(openMethod, popupImage, api) {
     this.imagePopupMethod = openMethod;
     this.popupImage = popupImage;
+    this.api = api;
 
     this.like = this._like.bind(this);
     this.remove = this._remove.bind(this);
@@ -47,6 +48,7 @@ class Card {
   // удаление карточки
   _remove(event) {
     this._removeEventListener();
+    this.api.deleteCard();
     event.target.closest('.place-card').remove();
   }
 

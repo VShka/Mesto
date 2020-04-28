@@ -19,7 +19,7 @@ const imagePopup = new Popup(
 
 const popupImage = document.querySelector('.popup__image');
 // экземпляр карточки
-const card = new Card(imagePopup.open.bind(imagePopup), popupImage);
+const card = new Card(imagePopup.open.bind(imagePopup), popupImage, api);
 
 // контейнер для CardList
 const placesList = document.querySelector('.places-list');

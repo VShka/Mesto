@@ -48,6 +48,14 @@ class Api {
     .then(this.checkRequest)
     .catch(this.catchErr);
   }
+  deleteCard(id) {
+    return fetch(`${this.url}/cards/${id}`, {
+      method: 'DELETE',
+      headers: this.headers
+    })
+    .then(this.checkRequest)
+    .catch(this.catchErr);
+  }
 
 
   // проверка состояния запроса
