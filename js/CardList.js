@@ -1,26 +1,27 @@
 class CardList {
-  constructor(container, cardMethod, api) {
+  constructor(container, api) {
     this.container = container;
-    this._cardMethod = cardMethod;
     this.api = api;
   }
 
   // добавляет карточку
-  addCard(name, link) {
-    // используем метод create экземпляра сard
-    const template = this._cardMethod.create(name, link);
-
-    this.container.insertAdjacentElement('beforeend', template);
-    // this.api.addNewCard(name, link);
+  addCard(instanceCard) {
+    this.api.addNewCard(event)
+      .then(() => {
+        this.container.appendChild(instanceCard);
+      })
+      .catch(err => console.error('NetworkError:', err.message));
   }
 
   // отрисовывает карточки при загрузке страницы из массива полученных карточек с сервера
-  render() {
+  downloadingUsersCards() {
     this.api
     .getInitialCards()
     .then(arrCards => {
       arrCards.forEach(card => {
-        this.addCard(card.name, card.link);
+        const newCard = new Card(card.name, card.link, imagePopup.open.bind(imagePopup), popupImage, api).create();
+        
+        this.container.appendChild(newCard);
       })
     })
     .catch(err => console.error('NetworkError:', err.message));

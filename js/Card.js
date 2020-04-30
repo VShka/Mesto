@@ -1,8 +1,11 @@
 class Card {
-  constructor(openMethod, popupImage, api) {
+  constructor(name, link, openMethod, popupImage, api) {
     this.imagePopupMethod = openMethod;
     this.popupImage = popupImage;
     this.api = api;
+    
+    this.name = name;
+    this.link = link;
 
     this.like = this._like.bind(this);
     this.remove = this._remove.bind(this);
@@ -10,7 +13,7 @@ class Card {
   }
   // создание карточки
 
-  create(name, link) {
+  create() {
     const cardContainer = document.createElement('div');
     const cardImage = document.createElement('div');
     const buttonDelete = document.createElement('button');
@@ -25,8 +28,8 @@ class Card {
     cardName.classList.add('place-card__name');
     buttonLike.classList.add('place-card__like-icon');
 
-    cardImage.setAttribute('style', `background-image: url(${link})`);
-    cardName.textContent = name;
+    cardImage.setAttribute('style', `background-image: url(${this.link})`);
+    cardName.textContent = this.name;
 
     cardContainer.appendChild(cardImage);
     cardImage.appendChild(buttonDelete);
@@ -66,8 +69,6 @@ class Card {
 
   _openImage(event) {
     this.imagePopupMethod(event);
-    // Можно лучше
-    // чтобы не парсить URL нужно сохранить его при создании карточки, а тут просто передать
-    this.popupImage.setAttribute('src', `${event.target.style.backgroundImage.slice(5, -2)}`);
+    this.popupImage.setAttribute('src', `${this.link}`);
   }
 }

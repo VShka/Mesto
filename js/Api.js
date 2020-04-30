@@ -23,26 +23,26 @@ class Api {
   }
   
   // обновляем данные о пользователе
-  updateUserData(name, job) {
+  updateUserData(event) {
     return fetch(`${this.url}/users/me`, {
         method: 'PATCH',
         headers: this.headers,
         body: JSON.stringify({
-          name: name,
-          about: job
+          name: event.currentTarget.elements.name.value,
+          about: event.currentTarget.elements.job.value,
         })
     })
     .then(this.checkRequest)
     .catch(this.catchErr);
   }
 
-  addNewCard(name, link) {
+  addNewCard(event) {
     return fetch(`${this.url}/cards`, {
       method: 'POST',
       headers: this.headers,
       body: JSON.stringify({
-        name: name,
-        link: link,
+        name: event.currentTarget.elements.name.value,
+        link: event.currentTarget.elements.link.value
       })
     })
     .then(this.checkRequest)

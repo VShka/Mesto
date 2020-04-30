@@ -1,3 +1,42 @@
+// контейнер попап картинки
+const popupTypeImage = document.querySelector('.popup_type_image');
+// "кнопка" открытия попапа картинки - кнопкой является сама картинка
+const btnOpenImage = document.querySelector('.place-card__image');
+const popupImage = document.querySelector('.popup__image');
+
+// контейнер попап добавления карточки
+const popupTypePlace = document.querySelector('.popup_type_place');
+// кнопка открытия попапа place
+const btnOpenPlace = document.querySelector('.user-info__button');
+
+// контейнер для CardList
+const placesList = document.querySelector('.places-list');
+
+// контейнер попап редактирования профиля
+const popupEditProfile = document.querySelector('.popup__edit-profile');
+// кнопка открытия попапа edit
+const btnOpenEdit = document.querySelector('.edit-profile__button');
+
+// форма редактирования персональных данных
+const popupEditForm = document.forms.edit;
+const [nameInput, jobInput] = popupEditForm.elements;
+// форма нового места
+const popupForm = document.forms.new;
+const [formName, formLink] = popupForm.elements;
+
+// поля персональной информации
+const userInfoName = document.querySelector('.user-info__name');
+const userInfoJob = document.querySelector('.user-info__job');
+const userInfoPhoto = document.querySelector('.user-info__photo');
+
+// объект ошибок ru
+const errors = {
+  valueMissing: 'Это обязательное поле',
+  tooShort: 'Должно быть от 2 до 30 символов',
+  typeMismatch: 'Здесь должна быть ссылка'
+};
+
+
 const api = new Api({
   baseUrl: 'https://praktikum.tk/cohort10',
   headers: {
@@ -6,10 +45,6 @@ const api = new Api({
   }
 });
 
-// контейнер попап картинки
-const popupTypeImage = document.querySelector('.popup_type_image');
-// "кнопка" открытия попапа картинки - кнопкой является сама картинка
-const btnOpenImage = document.querySelector('.place-card__image');
 // экземпляр класса Popup для картинки
 const imagePopup = new Popup(
   popupTypeImage,
@@ -17,52 +52,23 @@ const imagePopup = new Popup(
   btnOpenImage
 );
 
-const popupImage = document.querySelector('.popup__image');
-// экземпляр карточки
-const card = new Card(imagePopup.open.bind(imagePopup), popupImage, api);
-
-// контейнер для CardList
-const placesList = document.querySelector('.places-list');
 // экземпляр контейнера
-const cardList = new CardList(placesList, card, api);
-
-// передаем методу массив карточек и отрисовываем при загрузке в нашем контейнере
-cardList.render();
+const cardList = new CardList(placesList, api);
 
 // экземпляр класса действия с формой
 const formAction = new FormAction();
 
-// контейнер попап добавления карточки
-const popupTypePlace = document.querySelector('.popup_type_place');
-// кнопка открытия попапа place
-const btnOpenPlace = document.querySelector('.user-info__button');
 // экземпляр класса Popup для формы добавления карточки
 const placePopup = new Popup(
   popupTypePlace,
   'user-info__button',
   btnOpenPlace
 );
-// форма редактирования персональных данных
-const popupEditForm = document.forms.edit;
-const [nameInput, jobInput] = popupEditForm.elements;
-// форма нового места
-const popupForm = document.forms.new;
-const [formName, formLink] = popupForm.elements;
-// объект ошибок ru
-const errors = {
-  valueMissing: 'Это обязательное поле',
-  tooShort: 'Должно быть от 2 до 30 символов',
-  typeMismatch: 'Здесь должна быть ссылка'
-};
 
 // экземпляры класса для валидации форм
 const placeFormValidator = new FormValidator(popupForm, errors);
 const editFormValidator = new FormValidator(popupEditForm, errors);
 
-// контейнер попап редактирования профиля
-const popupEditProfile = document.querySelector('.popup__edit-profile');
-// кнопка открытия попапа edit
-const btnOpenEdit = document.querySelector('.edit-profile__button');
 // экземпляр класса Popup для профиля
 const editPopup = new Popup(
   popupEditProfile,
@@ -71,11 +77,6 @@ const editPopup = new Popup(
   editFormValidator
 );
 
-
-// поля персональной информации
-const userInfoName = document.querySelector('.user-info__name');
-const userInfoJob = document.querySelector('.user-info__job');
-const userInfoPhoto = document.querySelector('.user-info__photo');
 // экземпляр класса для перс данных
 const userInfo = new UserInfo({
   userInfoName,
@@ -86,27 +87,35 @@ const userInfo = new UserInfo({
   api,
   editPopup
 });
+
+
 // берем данные о пользоваетеле с сервера при загрузке страницы
 userInfo.setUserInfo();
-
-
+// передаем методу массив карточек и отрисовываем при загрузке в нашем контейнере
+cardList.downloadingUsersCards();
 
 // инициализация форм
-
 const initializationPlaceForm = (event) => {
   formAction.preventDefault(event);
-  cardList.addCard(formName.value, formLink.value);
+  cardList.addCard(
+    new Card(
+      formName.value,
+      formLink.value,
+      imagePopup.open.bind(imagePopup),
+      popupImage,
+      api)
+      .create()
+    );
   placePopup.close(event);
   formAction.resetFormFields(popupForm);
   placeFormValidator.setSubmitButtonState();
 }
-popupForm.addEventListener('submit', event => initializationPlaceForm(event));
-
 const initializationEditForm = (event) => {
   formAction.preventDefault(event);
   userInfo.updateUserInfo(event);
   editFormValidator.setSubmitButtonState();
 }
-popupEditForm.addEventListener('submit', event => initializationEditForm(event));
 
-// см. Review.md
+// слушатели на формы
+popupForm.addEventListener('submit', event => initializationPlaceForm(event));
+popupEditForm.addEventListener('submit', event => initializationEditForm(event));

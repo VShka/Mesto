@@ -5,6 +5,7 @@ class UserInfo {
     this.userInfoPhoto = userInfoPhoto;
     this.nameInput = nameInput;
     this.jobInput = jobInput;
+    
     this.api = api;
     this.popupMethod = editPopup;
   }
@@ -25,7 +26,7 @@ class UserInfo {
 
   // обновляет данные о пользователе, отправляю на сервак и сразу же меняет соответствующие поля 
   updateUserInfo(event) {
-    this.api.updateUserData(this.nameInput.value, this.jobInput.value)
+    this.api.updateUserData(event)
     .then(data => {
       this.userName.textContent = data.name;
       this.userJob.textContent = data.about;
