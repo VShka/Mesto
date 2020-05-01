@@ -1,11 +1,12 @@
 class Card {
-  constructor(name, link, openMethod, popupImage, api) {
+  constructor(name, link, likes, openMethod, popupImage, api) {
     this.imagePopupMethod = openMethod;
     this.popupImage = popupImage;
     this.api = api;
     
     this.name = name;
     this.link = link;
+    this.likes = likes;
 
     this.like = this._like.bind(this);
     this.remove = this._remove.bind(this);
@@ -19,23 +20,30 @@ class Card {
     const buttonDelete = document.createElement('button');
     const cardDescription = document.createElement('div');
     const cardName = document.createElement('h3');
+    const placeCardLikeContainer = document.createElement('div');
     const buttonLike = document.createElement('button');
+    const counterLikes = document.createElement('p');
 
     cardContainer.classList.add('place-card');
     cardImage.classList.add('place-card__image');
     buttonDelete.classList.add('place-card__delete-icon');
     cardDescription.classList.add('place-card__description');
     cardName.classList.add('place-card__name');
+    placeCardLikeContainer.classList.add('place-card__like-container');
     buttonLike.classList.add('place-card__like-icon');
+    counterLikes.classList.add('place-card__like-counter');
 
     cardImage.setAttribute('style', `background-image: url(${this.link})`);
     cardName.textContent = this.name;
+    counterLikes.textContent = this.likes;
 
     cardContainer.appendChild(cardImage);
     cardImage.appendChild(buttonDelete);
     cardContainer.appendChild(cardDescription);
     cardDescription.appendChild(cardName);
-    cardDescription.appendChild(buttonLike);
+    cardDescription.appendChild(placeCardLikeContainer);
+    placeCardLikeContainer.appendChild(buttonLike);
+    placeCardLikeContainer.appendChild(counterLikes);
 
     this.cardElem = cardContainer;
     this.setEventListener();

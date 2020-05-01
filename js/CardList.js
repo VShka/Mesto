@@ -7,10 +7,10 @@ class CardList {
   // добавляет карточку
   addCard(instanceCard) {
     this.api.addNewCard(event)
-      .then(() => {
-        this.container.appendChild(instanceCard);
-      })
-      .catch(err => console.error('NetworkError:', err.message));
+    .then(() => {
+      this.container.appendChild(instanceCard);
+    })
+    .catch(err => console.error('NetworkError:', err.message));
   }
 
   // отрисовывает карточки при загрузке страницы из массива полученных карточек с сервера
@@ -19,7 +19,7 @@ class CardList {
     .getInitialCards()
     .then(arrCards => {
       arrCards.forEach(card => {
-        const newCard = new Card(card.name, card.link, imagePopup.open.bind(imagePopup), popupImage, api).create();
+        const newCard = new Card(card.name, card.link, card.likes.length, imagePopup.open.bind(imagePopup), popupImage, api).create();
         
         this.container.appendChild(newCard);
       })

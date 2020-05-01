@@ -101,6 +101,7 @@ const initializationPlaceForm = (event) => {
     new Card(
       formName.value,
       formLink.value,
+      likes = 0,
       imagePopup.open.bind(imagePopup),
       popupImage,
       api)

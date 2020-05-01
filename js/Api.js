@@ -48,6 +48,11 @@ class Api {
     .then(this.checkRequest)
     .catch(this.catchErr);
   }
+
+  showLikes() {
+    
+  }
+
   deleteCard(id) {
     return fetch(`${this.url}/cards/${id}`, {
       method: 'DELETE',
