@@ -1,5 +1,5 @@
 class Card {
-  constructor(name, link, likes, openMethod, popupImage, api) {
+  constructor(name, link, likes, cardId, userId, openMethod, popupImage, api) {
     this.imagePopupMethod = openMethod;
     this.popupImage = popupImage;
     this.api = api;
@@ -7,6 +7,8 @@ class Card {
     this.name = name;
     this.link = link;
     this.likes = likes;
+    this.cardId = cardId;
+    this.userId  = userId;
 
     this.like = this._like.bind(this);
     this.remove = this._remove.bind(this);
@@ -33,6 +35,7 @@ class Card {
     buttonLike.classList.add('place-card__like-icon');
     counterLikes.classList.add('place-card__like-counter');
 
+    cardContainer.setAttribute('id', `${this.cardId}`);
     cardImage.setAttribute('style', `background-image: url(${this.link})`);
     cardName.textContent = this.name;
     counterLikes.textContent = this.likes;

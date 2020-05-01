@@ -22,7 +22,6 @@ const popupEditForm = document.forms.edit;
 const [nameInput, jobInput] = popupEditForm.elements;
 // форма нового места
 const popupForm = document.forms.new;
-const [formName, formLink] = popupForm.elements;
 
 // поля персональной информации
 const userInfoName = document.querySelector('.user-info__name');
@@ -44,6 +43,7 @@ const api = new Api({
     'Content-Type': 'application/json'
   }
 });
+
 
 // экземпляр класса Popup для картинки
 const imagePopup = new Popup(
@@ -92,30 +92,24 @@ const userInfo = new UserInfo({
 // берем данные о пользоваетеле с сервера при загрузке страницы
 userInfo.setUserInfo();
 // передаем методу массив карточек и отрисовываем при загрузке в нашем контейнере
-cardList.downloadingUsersCards();
+// cardList.downloadingUsersCards();
 
-// инициализация форм
+// добавление карточки владельца странички
 const initializationPlaceForm = (event) => {
   formAction.preventDefault(event);
-  cardList.addCard(
-    new Card(
-      formName.value,
-      formLink.value,
-      likes = 0,
-      imagePopup.open.bind(imagePopup),
-      popupImage,
-      api)
-      .create()
-    );
+  cardList.addOwnerCard();
   placePopup.close(event);
   formAction.resetFormFields(popupForm);
   placeFormValidator.setSubmitButtonState();
 }
+
+// обновление персональных данных владельца
 const initializationEditForm = (event) => {
   formAction.preventDefault(event);
   userInfo.updateUserInfo(event);
   editFormValidator.setSubmitButtonState();
 }
+
 
 // слушатели на формы
 popupForm.addEventListener('submit', event => initializationPlaceForm(event));
