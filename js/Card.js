@@ -1,7 +1,7 @@
 class Card {
-  constructor(name, link, likes, cardId, userId, openMethod, popupImage, api) {
+  constructor(name, link, likes, cardId, userId, openMethod, imageIncreased, api) {
     this.imagePopupMethod = openMethod;
-    this.popupImage = popupImage;
+    this.imageIncreased = imageIncreased;
     this.api = api;
     
     this.name = name;
@@ -80,6 +80,6 @@ class Card {
 
   _openImage(event) {
     this.imagePopupMethod(event);
-    this.popupImage.setAttribute('src', `${this.link}`);
+    this.imageIncreased.setAttribute('src', `${this.link}`);
   }
 }

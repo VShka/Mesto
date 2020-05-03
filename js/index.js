@@ -2,7 +2,7 @@
 const popupTypeImage = document.querySelector('.popup_type_image');
 // "кнопка" открытия попапа картинки - кнопкой является сама картинка
 const btnOpenImage = document.querySelector('.place-card__image');
-const popupImage = document.querySelector('.popup__image');
+const imageIncreased = document.querySelector('.popup__image');
 
 // контейнер попап добавления карточки
 const popupTypePlace = document.querySelector('.popup_type_place');
@@ -44,7 +44,6 @@ const api = new Api({
   }
 });
 
-
 // экземпляр класса Popup для картинки
 const imagePopup = new Popup(
   popupTypeImage,
@@ -53,7 +52,7 @@ const imagePopup = new Popup(
 );
 
 // экземпляр контейнера
-const cardList = new CardList(placesList, api);
+const cardList = new CardList(placesList, imagePopup, imageIncreased, api);
 
 // экземпляр класса действия с формой
 const formAction = new FormAction();
@@ -92,7 +91,7 @@ const userInfo = new UserInfo({
 // берем данные о пользоваетеле с сервера при загрузке страницы
 userInfo.setUserInfo();
 // передаем методу массив карточек и отрисовываем при загрузке в нашем контейнере
-// cardList.downloadingUsersCards();
+cardList.downloadingUsersCards();
 
 // добавление карточки владельца странички
 const initializationPlaceForm = (event) => {

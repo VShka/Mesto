@@ -1,7 +1,9 @@
 class CardList {
-  constructor(container, api) {
+  constructor(container, imagePopup, imageIncreased, api) {
     this.container = container;
     this.api = api;
+    this.imagePopup = imagePopup;
+    this.imageIncreased = imageIncreased;
   }
 
   // добавляет карточку в DOM
@@ -21,9 +23,9 @@ class CardList {
           card.likes.length,
           card._id,
           card.owner._id,
-          imagePopup.open.bind(imagePopup),
-          popupImage,
-          api);
+          this.imagePopup.open.bind(this.imagePopup),
+          this.imageIncreased,
+          this.api);
         this.addCard(userCards.create());
       })
     })
@@ -31,10 +33,6 @@ class CardList {
   }
 
   addOwnerCard() {
-    // const {
-    //   name: {value: formName},
-    //   link: {value: formLink},
-    // } = popupForm.elements;
     this.api
     .addNewCard(event)
     .then((card) => {
@@ -44,9 +42,9 @@ class CardList {
       card.likes.length,
       card._id,
       card.owner._id,
-      imagePopup.open.bind(imagePopup),
-      popupImage,
-      api);
+      this.imagePopup.open.bind(this.imagePopup),
+      this.imageIncreased,
+      this.api);
 
       this.addCard(ownerCard.create());
     })
