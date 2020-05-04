@@ -51,19 +51,6 @@ const imagePopup = new Popup(
   btnOpenImage
 );
 
-// экземпляр контейнера
-const cardList = new CardList(placesList, imagePopup, imageIncreased, api);
-
-// экземпляр класса действия с формой
-const formAction = new FormAction();
-
-// экземпляр класса Popup для формы добавления карточки
-const placePopup = new Popup(
-  popupTypePlace,
-  'user-info__button',
-  btnOpenPlace
-);
-
 // экземпляры класса для валидации форм
 const placeFormValidator = new FormValidator(popupForm, errors);
 const editFormValidator = new FormValidator(popupEditForm, errors);
@@ -86,6 +73,19 @@ const userInfo = new UserInfo({
   api,
   editPopup
 });
+
+// экземпляр контейнера
+const cardList = new CardList(placesList, imagePopup, imageIncreased, api, userInfo.getOwnerId.bind(userInfo));
+
+// экземпляр класса действия с формой
+const formAction = new FormAction();
+
+// экземпляр класса Popup для формы добавления карточки
+const placePopup = new Popup(
+  popupTypePlace,
+  'user-info__button',
+  btnOpenPlace
+);
 
 
 // берем данные о пользоваетеле с сервера при загрузке страницы

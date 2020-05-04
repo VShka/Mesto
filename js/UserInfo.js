@@ -5,7 +5,7 @@ class UserInfo {
     this.userInfoPhoto = userInfoPhoto;
     this.nameInput = nameInput;
     this.jobInput = jobInput;
-    
+
     this.api = api;
     this.popupMethod = editPopup;
   }
@@ -20,6 +20,7 @@ class UserInfo {
       // подставляет в форму текущие значения полей
       this.nameInput.value = this.userName.textContent;
       this.jobInput.value = this.userJob.textContent;
+      this.id = data._id;
     })
     .catch(err => console.error('NetworkError:', err.message));
   }
@@ -34,5 +35,9 @@ class UserInfo {
       this.popupMethod.close(event);
     })
     .catch(err => console.error('NetworkError:', err.message));
+  }
+
+  getOwnerId() {
+    return this.id;
   }
 }

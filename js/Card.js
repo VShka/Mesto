@@ -1,7 +1,8 @@
 class Card {
-  constructor(name, link, likes, cardId, userId, openMethod, imageIncreased, api) {
+  constructor(name, link, likes, cardId, userId, openMethod, imageIncreased, ownerId, api) {
     this.imagePopupMethod = openMethod;
     this.imageIncreased = imageIncreased;
+    this.ownerId = ownerId;
     this.api = api;
     
     this.name = name;
@@ -48,6 +49,10 @@ class Card {
     placeCardLikeContainer.appendChild(buttonLike);
     placeCardLikeContainer.appendChild(counterLikes);
 
+    if (this.ownerId !== this.userId) {
+      buttonDelete.setAttribute('style', 'display: none');
+    }
+
     this.cardElem = cardContainer;
     this.setEventListener();
 
@@ -61,9 +66,14 @@ class Card {
 
   // удаление карточки
   _remove(event) {
-    this._removeEventListener();
-    this.api.deleteCard();
-    event.target.closest('.place-card').remove();
+    if (confirm('Вы действительно хотите удалить карточку?')) {
+      this.api.deleteCard(this.cardId)
+      .then(() => {
+        this._removeEventListener();
+        event.target.closest('.place-card').remove();
+      })
+      .catch(err => console.error('Error', err.message));
+    }
   }
 
   setEventListener() {

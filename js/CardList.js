@@ -1,7 +1,9 @@
 class CardList {
-  constructor(container, imagePopup, imageIncreased, api) {
+  constructor(container, imagePopup, imageIncreased, api, ownerId) {
     this.container = container;
     this.api = api;
+    this.ownerId = ownerId;
+
     this.imagePopup = imagePopup;
     this.imageIncreased = imageIncreased;
   }
@@ -25,8 +27,9 @@ class CardList {
           card.owner._id,
           this.imagePopup.open.bind(this.imagePopup),
           this.imageIncreased,
+          this.ownerId(),
           this.api);
-        this.addCard(userCards.create());
+          this.addCard(userCards.create());
       })
     })
     .catch(err => console.error('NetworkError:', err.message));
@@ -44,8 +47,8 @@ class CardList {
       card.owner._id,
       this.imagePopup.open.bind(this.imagePopup),
       this.imageIncreased,
+      this.ownerId(),
       this.api);
-
       this.addCard(ownerCard.create());
     })
     .catch(err => console.error(err));
