@@ -22,7 +22,7 @@ class CardList {
         const userCards = new Card(
           card.name,
           card.link,
-          card.likes.length,
+          card.likes,
           card._id,
           card.owner._id,
           this.imagePopup.open.bind(this.imagePopup),
@@ -32,7 +32,7 @@ class CardList {
           this.addCard(userCards.create());
       })
     })
-    .catch(err => console.error('NetworkError:', err.message));
+    .catch(err => console.error('NetworkError:', err));
   }
 
   addOwnerCard() {
@@ -42,7 +42,7 @@ class CardList {
       const ownerCard = new Card(
       card.name,
       card.link,
-      card.likes.length,
+      card.likes,
       card._id,
       card.owner._id,
       this.imagePopup.open.bind(this.imagePopup),

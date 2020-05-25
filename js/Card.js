@@ -26,6 +26,8 @@ class Card {
     const placeCardLikeContainer = document.createElement('div');
     const buttonLike = document.createElement('button');
     const counterLikes = document.createElement('p');
+    const cardIsLiked = this.likes.some(item => this.ownerId === item._id);
+    
 
     cardContainer.classList.add('place-card');
     cardImage.classList.add('place-card__image');
@@ -33,13 +35,15 @@ class Card {
     cardDescription.classList.add('place-card__description');
     cardName.classList.add('place-card__name');
     placeCardLikeContainer.classList.add('place-card__like-container');
+    
     buttonLike.classList.add('place-card__like-icon');
+    
     counterLikes.classList.add('place-card__like-counter');
 
     cardContainer.setAttribute('id', `${this.cardId}`);
     cardImage.setAttribute('style', `background-image: url(${this.link})`);
     cardName.textContent = this.name;
-    counterLikes.textContent = this.likes;
+    counterLikes.textContent = this.likes.length;
 
     cardContainer.appendChild(cardImage);
     cardImage.appendChild(buttonDelete);
@@ -49,6 +53,11 @@ class Card {
     placeCardLikeContainer.appendChild(buttonLike);
     placeCardLikeContainer.appendChild(counterLikes);
 
+    
+    if (cardIsLiked === true) {
+      buttonLike.classList.add('place-card__like-icon_liked');
+    }
+    
     if (this.ownerId !== this.userId) {
       buttonDelete.setAttribute('style', 'display: none');
     }
@@ -61,7 +70,23 @@ class Card {
 
   // лайк/дизлайк
   _like(event) {
-    event.target.classList.toggle('place-card__like-icon_liked');
+    const cardLikesCounter = document.querySelector('.place-card__like-counter');
+
+    if (event.target.closest('.place-card__like-icon_liked')) {
+      this.api.deleteLikes(this.cardId)
+      .then((card) => {
+        event.target.classList.remove('place-card__like-icon_liked');
+        cardLikesCounter.textContent = card.likes.length;
+      })
+      .catch(err => console.error('Error', err));
+    } else {
+      this.api.putLikes(this.cardId)
+      .then((card) => {
+        event.target.classList.add('place-card__like-icon_liked');
+        cardLikesCounter.textContent = card.likes.length;
+      })
+      .catch(err => console.error('Error', err));
+    }
   }
 
   // удаление карточки
@@ -72,7 +97,7 @@ class Card {
         this._removeEventListener();
         event.target.closest('.place-card').remove();
       })
-      .catch(err => console.error('Error', err.message));
+      .catch(err => console.error('Error', err));
     }
   }
 
