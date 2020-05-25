@@ -58,6 +58,24 @@ class Api {
     .catch(this.catchErr);
   }
 
+  putLikes(cardId) {
+    return fetch(`${this.url}/cards/like/${cardId}`, {
+      method: 'PUT',
+      headers: this.headers
+    })
+    .then(this.checkRequest)
+    .catch(this.catchErr);
+  }
+
+  deleteLikes(cardId) {
+    return fetch(`${this.url}/cards/like/${cardId}`, {
+      method: 'DELETE',
+      headers: this.headers
+    })
+    .then(this.checkRequest)
+    .catch(this.catchErr);
+  }
+
 
   // проверка состояния запроса
   checkRequest(res) {
