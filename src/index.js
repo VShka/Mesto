@@ -124,3 +124,5 @@ const initializationEditForm = (event) => {
 // слушатели на формы
 popupForm.addEventListener('submit', event => initializationPlaceForm(event));
 popupEditForm.addEventListener('submit', event => initializationEditForm(event));
+
+console.log("well done");
