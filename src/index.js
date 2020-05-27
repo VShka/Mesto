@@ -1,4 +1,4 @@
-// import "./pages/index.css";
+import "./pages/index.css";
 
 import Api from "./js/Api";
 import Card from "./js/Card";
@@ -124,7 +124,3 @@ const initializationEditForm = (event) => {
 // слушатели на формы
 popupForm.addEventListener('submit', event => initializationPlaceForm(event));
 popupEditForm.addEventListener('submit', event => initializationEditForm(event));
-
-const arr = [1,2,3];
-const sum = arr.map(num => num+num);
-console.log(sum);
