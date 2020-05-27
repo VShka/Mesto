@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/VShka/Mesto/issues"
   },
-  "homepage": "https://github.com/VShka/Mesto#readme"
+  "homepage": "https://github.com/VShka/Mesto#readme",
+  "devDependencies": {
+    "webpack": "^4.43.0"
+  }
 }
