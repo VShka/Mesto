@@ -1,4 +1,4 @@
-class Card {
+export default class Card {
   constructor(name, link, likes, cardId, userId, openMethod, imageIncreased, ownerId, api) {
     this.imagePopupMethod = openMethod;
     this.imageIncreased = imageIncreased;

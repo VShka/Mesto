@@ -1,4 +1,4 @@
-class FormAction {
+export default class FormAction {
 
   // сброс поведения формы по умолчанию
   preventDefault(event) {

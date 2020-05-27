@@ -1,3 +1,14 @@
+import "./pages/index.css";
+
+import Api from "./js/Api";
+import Card from "./js/Card";
+import CardList from "./js/CardList";
+import FormAction from "./js/FormAction";
+import FormValidator from "./js/FormValidator";
+import Popup from "./js/Popup";
+import UserInfo from "./js/UserInfo";
+
+
 // контейнер попап картинки
 const popupTypeImage = document.querySelector('.popup_type_image');
 // "кнопка" открытия попапа картинки - кнопкой является сама картинка

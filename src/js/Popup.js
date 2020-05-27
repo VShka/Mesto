@@ -1,4 +1,4 @@
-class Popup {
+export default class Popup {
   constructor(container, openFormButton, btnOpen, validatorMethod) {
     this.container = container;
     this.openFormButton = openFormButton;
