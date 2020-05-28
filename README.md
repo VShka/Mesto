@@ -30,14 +30,20 @@
 
 # Установка
 Проверьте наличие установленного node.js и npm
+
 Копируем репозиторий на компьютер 
 `git clone https://github.com/VShka/Mesto.git`
+
 Устанавливаем зависимости
 `npm install`
+
 ## Работа 
+
 Для локальной разработки с поднятием сервера
 `npm run dev`
+
 Собрать в продакшен 
 `npm run build`
+
 Задеплоить на GitHub pages
 `npm run deploy`
