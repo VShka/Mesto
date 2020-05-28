@@ -1,6 +1,6 @@
 {
   "name": "mesto",
-  "homepage": "https://github.com/VShka/Mesto",
+  "homepage": "https://VShka.github.io/mesto/",
   "version": "1.0.0",
   "description": "Сервис, где можно делиться различными фотографиями",
   "main": "index.js",
