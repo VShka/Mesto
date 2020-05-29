@@ -46,9 +46,11 @@ const errors = {
   typeMismatch: 'Здесь должна быть ссылка'
 };
 
+// url сервера
+const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort10' : 'https://praktikum.tk/cohort10';
 
 const api = new Api({
-  baseUrl: 'https://praktikum.tk/cohort10',
+  baseUrl: serverUrl,
   headers: {
     authorization: 'b0a1ec88-95e1-4628-ac8e-34d4711900a7',
     'Content-Type': 'application/json'
