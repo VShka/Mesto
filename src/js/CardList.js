@@ -1,3 +1,5 @@
+import Card from "./Card";
+
 export default class CardList {
   constructor(container, imagePopup, imageIncreased, api, ownerId) {
     this.container = container;

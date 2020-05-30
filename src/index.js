@@ -1,7 +1,6 @@
 import "./pages/index.css";
 
 import Api from "./js/Api";
-import Card from "./js/Card";
 import CardList from "./js/CardList";
 import FormAction from "./js/FormAction";
 import FormValidator from "./js/FormValidator";
