@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Mesto</title>
-  <link rel="stylesheet" href="./pages/index.css">
+  <link rel="stylesheet" href="<%=htmlWebpackPlugin.files.css %>">
 </head>
 <body>
   <div class="root">
     <header class="header root__section">
-      <img src="./images/logo.svg" alt="mesto logo" class="logo">
+      <img src="<%=require('./images/logo.svg')%>" alt="mesto logo" class="logo">
     </header>
     <div class="profile root__section">
       <div class="user-info">
@@ -28,7 +28,7 @@
     </div>
     <div class="popup popup_type_place">
       <div class="popup__content">
-        <img src="./images/close.svg" alt="Закрыть окно добавления фотографий" class="popup__close">
+        <img src="<%=require('./images/close.svg')%>" alt="Закрыть окно добавления фотографий" class="popup__close">
         <h3 class="popup__title">Новое место</h3>
         <form class="popup__form popup__form_place" name="new" novalidate>
           <input type="text"name="name" class="popup__input popup__input_type_name" placeholder="Название" required minlength="2" maxlength="30">
@@ -41,10 +41,11 @@
     </div>
     <div class="popup popup__edit-profile">
       <div class="popup__content">
-        <img src="./images/close.svg" alt="Закрыть окно редактирования профиля" class="popup__close">
+        <img src="<%=require('./images/close.svg')%>" alt="Закрыть окно редактирования профиля" class="popup__close">
         <h3 class="popup__title">Редактировать профиль</h3>
         <form class="popup__form" name="edit" novalidate>
-          <input type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" required minlength="2" maxlength="30">
+          <input
+          type="text" name="name" class="popup__input popup__input_type_name" placeholder="Имя" required minlength="2" maxlength="30">
           <span id="error-name" class="error-message"></span>
           <input type="text" name="job" class="popup__input" placeholder="О себе" required minlength="2" maxlength="30">
           <span id="error-job" class="error-message"></span>
@@ -54,18 +55,11 @@
     </div>
     <div class="popup popup_type_image">
       <div class="popup__image-container">
-        <img src="./images/close.svg" alt="Закрыть картинку" class="close__image popup__close close"/>
+        <img src="<%=require('./images/close.svg')%>" alt="Закрыть картинку" class="close__image popup__close close"/>
         <img src="" alt="" class="popup__image"/>
       </div>
     </div>
   </div>
-  <script src="js/UserInfo.js"></script>
-  <script src="js/Card.js"></script>
-  <script src="js/CardList.js"></script>
-  <script src="js/Popup.js"></script>
-  <script src="js/FormAction.js"></script>
-  <script src="js/FormValidator.js"></script>
-  <script src="js/Api.js"></script>
-  <script src="js/index.js"></script>
+  <script src="<%= htmlWebpackPlugin.files.js %>"></script>
 </body>
 </html>

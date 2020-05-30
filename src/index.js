@@ -1,3 +1,13 @@
+import "./pages/index.css";
+
+import Api from "./js/Api";
+import CardList from "./js/CardList";
+import FormAction from "./js/FormAction";
+import FormValidator from "./js/FormValidator";
+import Popup from "./js/Popup";
+import UserInfo from "./js/UserInfo";
+
+
 // контейнер попап картинки
 const popupTypeImage = document.querySelector('.popup_type_image');
 // "кнопка" открытия попапа картинки - кнопкой является сама картинка
@@ -35,9 +45,11 @@ const errors = {
   typeMismatch: 'Здесь должна быть ссылка'
 };
 
+// url сервера
+const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort10' : 'https://praktikum.tk/cohort10';
 
 const api = new Api({
-  baseUrl: 'https://praktikum.tk/cohort10',
+  baseUrl: serverUrl,
   headers: {
     authorization: 'b0a1ec88-95e1-4628-ac8e-34d4711900a7',
     'Content-Type': 'application/json'
