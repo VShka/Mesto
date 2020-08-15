@@ -46,7 +46,7 @@ const errors = {
 };
 
 // url сервера
-const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort10' : 'https://praktikum.tk/cohort10';
+const serverUrl = NODE_ENV === 'development' ? 'http://praktikum.tk/cohort10' : 'https://nomoreparties.co/';
 
 const api = new Api({
   baseUrl: serverUrl,
